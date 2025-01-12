@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/me/me",
+    "pages/chatspace/chatspace",
+    "pages/share/share",
+    "pages/teamup/teamup",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "旅伴奇遇工坊",
+    "navigationBarBackgroundColor": "#ffe4c4"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "borderStyle": "white",
+    "backgroundColor": "#ffe4c4",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/navbar/home.png",
+        "selectedIconPath": "/images/navbar/home_active.png"
+      },
+      {
+        "pagePath": "pages/share/share",
+        "text": "游记",
+        "iconPath": "/images/navbar/share.png",
+        "selectedIconPath": "/images/navbar/share_active.png"
+      },
+      {
+        "pagePath": "pages/teamup/teamup",
+        "text": "组队",
+        "iconPath": "/images/navbar/teamup.png",
+        "selectedIconPath": "/images/navbar/teamup_active.png"
+      },
+      {
+        "pagePath": "pages/chatspace/chatspace",
+        "text": "聊天室",
+        "iconPath": "/images/navbar/chat.png",
+        "selectedIconPath": "/images/navbar/chat_active.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "/images/navbar/my.png",
+        "selectedIconPath": "/images/navbar/my_active.png"
+      }
+    ]
+  }
+}
