@@ -1,0 +1,24 @@
+<!--pages/home/home.wxml-->
+<!--搜索框，跳转searchResult页面-->
+<search urlPath="{{urlPath}}" url="/pages/searchResult/searchResult"></search>
+
+<!--轮播图-->
+<swiper class="homePage_slider" indicator-dots="true" display-multiple-items="1" indicator-active-color="#fff" indicator-color="#999" autoplay="true" interval="3000" duration="500" circular="true">
+        <swiper-item wx:for="{{swiperList}}" wx:key="id">
+                <a href="#"><image src="{{item.url}}"></image></a>
+        </swiper-item>
+</swiper>
+
+<view class="functionArea">
+    <view class="title">常用功能</view>
+    <view class="bd">
+        
+    </view>    
+</view>
+
+
+
+
+
+
+

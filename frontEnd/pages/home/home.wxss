@@ -1,0 +1,30 @@
+/* pages/home/home.wxss */
+.wrapper {
+  margin:0 auto
+}
+
+.homePage_slider {
+    height: 350rpx;
+}
+
+.homePage_slider image {
+  position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    left: 0;
+    top: 0;
+}
+
+.functionArea .title {
+  margin-top: 10rpx;
+  text-align: center;
+}
+
+.functionArea .bd {
+  display: flex;
+}
+
+
+
+
