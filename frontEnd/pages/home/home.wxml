@@ -12,7 +12,18 @@
 <view class="functionArea">
     <view class="title">常用功能</view>
     <view class="bd">
-        
+        <view class="route-gen">
+            <image src="path/to/route-image.png" alt="" />
+            <a href="#">旅游路线生成</a>
+        </view>
+        <view class="trip-plan">
+            <image src="path/to/trip-image.png" alt="" />
+            <a href="#">个性化旅游方案</a>
+        </view>
+        <view class="show-more">
+            <image src="path/to/show-image.png" alt="" />
+            <a href="#">经验分享</a>
+        </view>
     </view>    
 </view>
 
