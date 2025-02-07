@@ -1,13 +1,9 @@
-.wrapper {
-  margin:0 auto
-}
-
 .homePage_slider {
-    height: 350rpx;
+  height: 350rpx;
 }
 
 .homePage_slider image {
-  position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
@@ -49,23 +45,23 @@
   border-radius: 10rpx;
 }
 
-.common-func .bd navigator {
-  color: #333;
-  text-decoration: none;
-  font-size: 30rpx;
-}
-
 .common-func .bd image {
   margin-bottom: 10rpx; 
-  width: 60%;  
+  width: 70%;  
   height: 80%;  
 }
 
+.common-func .bd .func-name {
+  font-size: 30rpx;
+  color: #1f1f1f;
+}
+
 .notice .bd .article{
+  margin: 10rpx 0; 
   display: flex;
   width: 100vw;
-  height: 15vh;
-  border: 1px solid #999;
+  height: 17vh;
+  border: 2px solid #999;
   border-left:0;
   border-right:0;
 }
@@ -77,15 +73,36 @@
 }
 
 .notice .bd .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex: 1;
   padding: 10rpx;
   text-align: left;
-  font-size: 4vw;
+  font-size: 32rpx;
   color: #333;
 }
 
 .notice .right .header {
-  
+  font-weight: 700;
+}
+
+.notice .right .content {
+  margin-top: 10rpx;
+  font-size: 27rpx;
+  color: #999;
+}
+
+.notice .right .pub-date {
+  font-size: 23rpx;
+  color:#999;
+}
+
+.footer {
+  margin: 60rpx 0;
+  width: 100vw;
+  text-align: center;
+  color:#999
 }
 
 

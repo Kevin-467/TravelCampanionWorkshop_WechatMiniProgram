@@ -39,18 +39,30 @@ Page({
           navUrl:'/pages/share/share',
           openType:'switchTab'
         },
+        {
+          id:3,
+          name:'组队',
+          className:'teamup',
+          imgUrl:'../../images/navbar/teamup_active.png',
+          navUrl:'/pages/teamup/teamup',
+          openType:'switchTab'
+        }
       ],
       article:[
         {
           id:1,
-          articleName:'欢迎访问旅伴奇遇工坊!',
-          picSrc:'../../images/homePage/游记.png'
+          title:'欢迎访问旅伴奇遇工坊!',
+          content:'寻找旅伴,尽在旅伴奇遇工坊',
+          picSrc:'../../images/homePage/游记.png',
+          pubDate:'2025-1-20 17:45'
         },
         {
           id:2,
-          articleName:'寻找旅伴指南',
-          picSrc:'../../images/homePage/旅行.png'
-        }
+          title:'寻找旅伴指南',
+          content:`在本站，您可找到适合自己的旅游路线和旅行方案！您可通过发布组队或参与其他旅友发起的组队，找到合适自己的旅伴！`,
+          picSrc:'../../images/homePage/旅行.png',
+          pubDate:'2025-1-21 17:50'
+        },
       ],
   },
 

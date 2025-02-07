@@ -1,6 +1,4 @@
 <!--pages/home/home.wxml-->
-<!--搜索框，跳转searchResult页面-->
-<search urlPath="{{urlPath}}" url="/pages/searchResult/searchResult"></search>
 
 <!--轮播图-->
 <swiper class="homePage_slider" indicator-dots="true" display-multiple-items="1" indicator-active-color="#fff" indicator-color="#999" autoplay="true" interval="3000" duration="500" circular="true">
@@ -16,7 +14,7 @@
         <view wx:for="{{commonFunc}}" wx:key="id" class="{{item.className}}">
             <navigator url="{{item.navUrl}}" open-type="{{item.openType?item.openType:'navigate'}}">
                 <image src="{{item.imgUrl}}" alt=""/>
-                <view>{{item.name}}</view>
+                <view class="func-name">{{item.name}}</view>
             </navigator>
         </view>
     </view>    
@@ -29,12 +27,19 @@
         <view class="article" wx:for="{{article}}" wx:key="id"> 
             <image src="{{item.picSrc}}" alt=""/>
             <view class="right">
-                <view class="header">{{item.articleName}}</view>
+                <view class="header">{{item.title}}</view>
                 <view class="content">{{item.content}}</view>
+                <view class="pub-date">发布时间：<text>{{item.pubDate}}</text></view>
             </view>
         </view>
     </view>
 </view>
+
+<!-- 底部 -->
+ <view class="footer">
+    <view class="text"> ---- 旅行寻伴 尽在旅伴奇遇工坊 ---- </view>
+ </view>
+
    
 
 
