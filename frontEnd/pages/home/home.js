@@ -43,15 +43,13 @@ Page({
       article:[
         {
           id:1,
-          navUrl:'#',
           articleName:'欢迎访问旅伴奇遇工坊!',
-          picUrl:'../../images/homePage/游记.png'
+          picSrc:'../../images/homePage/游记.png'
         },
         {
           id:2,
-          navUrl:'#',
-          articleName:'欢迎访问旅伴奇遇工坊!',
-          picUrl:'../../images/homePage/旅行.png'
+          articleName:'寻找旅伴指南',
+          picSrc:'../../images/homePage/旅行.png'
         }
       ],
   },

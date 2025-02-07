@@ -5,13 +5,13 @@
 <!--轮播图-->
 <swiper class="homePage_slider" indicator-dots="true" display-multiple-items="1" indicator-active-color="#fff" indicator-color="#999" autoplay="true" interval="3000" duration="500" circular="true">
         <swiper-item wx:for="{{swiperList}}" wx:key="id">
-                <a href="#"><image src="{{item.url}}"></image></a>
+            <image src="{{item.url}}"></image>
         </swiper-item>
 </swiper>
 
 <!-- 常用功能 -->
 <view class="common-func">
-    <view class="title">常用功能</view>
+    <view class="title">常 用 功 能</view>
     <view class="bd">
         <view wx:for="{{commonFunc}}" wx:key="id" class="{{item.className}}">
             <navigator url="{{item.navUrl}}" open-type="{{item.openType?item.openType:'navigate'}}">
@@ -22,18 +22,19 @@
     </view>    
 </view>
 
-<!-- 游记分享 -->
- <view class="news">
-    <view class="title">旅游资讯</view>
+<!-- 公告 需从后端获取数据 仅由后台添加删除 无需用户数据-->
+<view class="notice">
+    <view class="title">公 告</view>
     <view class="bd">
-        <view class="article" wx-for="{{article}}" wx:key="id">
-            <navigator url="{{item.navUrl}}">
-                <image src="{{item.picUrl}}"></image>
-                <text class="articleTitle">{{item.articleName}}</text>
-            </navigator>
+        <view class="article" wx:for="{{article}}" wx:key="id"> 
+            <image src="{{item.picSrc}}" alt=""/>
+            <view class="right">
+                <view class="header">{{item.articleName}}</view>
+                <view class="content">{{item.content}}</view>
+            </view>
         </view>
     </view>
- </view>
+</view>
    
 
 
