@@ -9,23 +9,32 @@
         </swiper-item>
 </swiper>
 
-<view class="functionArea">
+<!-- 常用功能 -->
+<view class="common-func">
     <view class="title">常用功能</view>
     <view class="bd">
-        <view class="route-gen">
-            <image src="path/to/route-image.png" alt="" />
-            <a href="#">旅游路线生成</a>
-        </view>
-        <view class="trip-plan">
-            <image src="path/to/trip-image.png" alt="" />
-            <a href="#">个性化旅游方案</a>
-        </view>
-        <view class="show-more">
-            <image src="path/to/show-image.png" alt="" />
-            <a href="#">经验分享</a>
+        <view wx:for="{{commonFunc}}" wx:key="id" class="{{item.className}}">
+            <navigator url="{{item.navUrl}}" open-type="{{item.openType?item.openType:'navigate'}}">
+                <image src="{{item.imgUrl}}" alt=""/>
+                <view>{{item.name}}</view>
+            </navigator>
         </view>
     </view>    
 </view>
+
+<!-- 游记分享 -->
+ <view class="news">
+    <view class="title">旅游资讯</view>
+    <view class="bd">
+        <view class="article" wx-for="{{article}}" wx:key="id">
+            <navigator url="{{item.navUrl}}">
+                <image src="{{item.picUrl}}"></image>
+                <text class="articleTitle">{{item.articleName}}</text>
+            </navigator>
+        </view>
+    </view>
+ </view>
+   
 
 
 

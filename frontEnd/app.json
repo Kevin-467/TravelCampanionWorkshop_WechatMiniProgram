@@ -5,8 +5,9 @@
     "pages/chatspace/chatspace",
     "pages/share/share",
     "pages/teamup/teamup",
-    "pages/login/login",
-    "pages/searchResult/searchResult"
+    "pages/searchResult/searchResult",
+    "pages/routeGen/routeGen",
+    "pages/planGen/planGen"
   ],
   "window": {
     "backgroundTextStyle": "light",

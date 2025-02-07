@@ -16,45 +16,65 @@
     top: 0;
 }
 
-.functionArea .title {
-  margin-top: 10rpx;
+.title {
+  margin:10px auto;
+  width:95vw;
+  height:3vh;
   text-align: center;
   font-size: 32rpx;
   font-weight: bold;
+  border:1px solid #999;
+  border-radius: 1.5vh;
 }
 
-.functionArea .bd {
-  width: 80vw;
+.common-func .bd {
+  width: 100%;
   min-height: 12vh;
   margin: 10rpx auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: pink;
   border-radius: 10rpx;
 }
 
-.functionArea .bd view {
+.common-func .bd > view {
   display: flex;
-  width: 120rpx;
+  padding: 10rpx;
+  width: 130rpx;
   height: 120rpx;
   flex-direction: column; /* 使图片和文字竖直排列 */
   align-items: center; /* 水平居中 */
   text-align: center;
+  background-color:#faebd7;
   border: 1px solid #000;
+  border-radius: 10rpx;
 }
 
-.functionArea .bd image {
-  width: 40rpx;  /* 控制图片大小 */
-  height: 40rpx;  /* 保持图片的宽高比例 */
-  margin-bottom: 10rpx;  /* 图片和文本之间的间距 */
-}
-
-.functionArea .bd a {
+.common-func .bd navigator {
   color: #333;
   text-decoration: none;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
+
+.common-func .bd image {
+  margin-bottom: 10rpx; 
+  width: 60%;  
+  height: 80%;  
+}
+
+.news .bd view{
+  width: 100vw;
+  height: 15vh;
+  border: 1px solid #999;
+  border-left:0;
+  border-right:0;
+}
+
+.news .bd navigator {
+  display: flex;
+}
+
+
 
 
 

@@ -16,6 +16,44 @@ Page({
           url:"../../images/slider/slider-3.jpg"
         },
       ],
+      commonFunc:[
+        {
+          id:0,
+          name:'旅游路线',
+          className:'route-gen',
+          imgUrl:'../../images/homePage/旅游_路线.png',
+          navUrl:'/pages/routeGen/routeGen',
+        },
+        {
+          id:1,
+          name:'旅游方案',
+          className:'trip-plan',
+          imgUrl:'../../images/homePage/旅行.png',
+          navUrl:'/pages/planGen/planGen',
+        },
+        {
+          id:2,
+          name:'更多游记',
+          className:'route-gen',
+          imgUrl:'../../images/homePage/游记.png',
+          navUrl:'/pages/share/share',
+          openType:'switchTab'
+        },
+      ],
+      article:[
+        {
+          id:1,
+          navUrl:'#',
+          articleName:'欢迎访问旅伴奇遇工坊!',
+          picUrl:'../../images/homePage/游记.png'
+        },
+        {
+          id:2,
+          navUrl:'#',
+          articleName:'欢迎访问旅伴奇遇工坊!',
+          picUrl:'../../images/homePage/旅行.png'
+        }
+      ],
   },
 
   /**
