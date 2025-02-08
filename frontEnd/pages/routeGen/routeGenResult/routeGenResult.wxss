@@ -1,1 +1,14 @@
-/* pages/routeGen/routeGenResult/routeGenResult.wxss */
+.page-title {
+    margin: 10rpx;
+    height: 50rpx;
+    text-align: center;
+    font-size: 40rpx;
+    border: 1px solid #999;
+    border-radius: 25rpx;
+}
+
+.tip {
+    font-size: 30rpx;
+    color: #999;
+    text-align: center;
+}
