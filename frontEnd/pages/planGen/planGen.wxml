@@ -1,5 +1,46 @@
-<!--pages/planGen/planGen.wxml-->
-<view>
+<view class="survey-contanier">
+    <!-- 测评标题 -->
+    <text class="survey-title">个性化旅游测评</text>
     
-</view>
+    <!-- 测评问题 -->
+    <view wx:for="{{questions}}" wx:key="{{item.id}}" class="question-card">
+      <text class="question">{{index + 1}}. {{item.text}}</text>
+  
+      <!-- 单选题 -->
+      <view wx:if="{{item.type === 'single'}}">
+        <radio-group bindchange="handleChoice" data-id="{{item.id}}" class="radio-group">
+          <label wx:for="{{item.options}}" wx:key="{{item}}" class="radio-label">
+            <radio value="{{item}}" class="radio">{{item}}</radio>
+          </label>
+        </radio-group>
+      </view>
+  
+      <!-- 多选题 -->
+      <view wx:elif="{{item.type === 'multiple'}}">
+        <checkbox-group bindchange="handleChoice" data-id="{{item.id}}" class="checkbox-group">
+          <label wx:for="{{item.options}}" wx:key="{{item}}" class="checkbox-label">
+            <checkbox value="{{item}}" class="checkbox">{{item}}</checkbox>
+          </label>
+        </checkbox-group>
+      </view>
+  
+      <!-- 文字输入题 -->
+      <view wx:elif="{{item.type === 'text'}}">
+        <textarea class="input-text" placeholder="请填写您的答案" bindinput="handleInput" data-id="{{item.id}}" />
+      </view>
+  
+      <!-- 滑块题 -->
+      <view wx:elif="{{item.type === 'slider'}}">
+        <slider class="slider" min="{{item.min}}" max="{{item.max}}" step="{{item.step}}" bindchange="handleChoice" data-id="{{item.id}}" show-value />
+      </view>
+    </view>
+  
+    <!-- 进度条 -->
+    <view class="progress-bar">
+      <text>已完成 {{completedCount}} / {{questions.length}} 项</text>
+    </view>
+  
+    <!-- 提交按钮 -->
+    <button class="submit-button" type="primary" bindtap="submitSurvey">提交问卷</button>
+  </view>
   

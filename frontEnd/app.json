@@ -9,7 +9,8 @@
     "pages/routeGen/routeGen",
     "pages/planGen/planGen",
     "pages/login/login",
-    "pages/routeGen/routeGenResult/routeGenResult"
+    "pages/routeGen/routeGenResult/routeGenResult",
+    "pages/planGen/planGenResult/planGenResult"
   ],
   "window": {
     "backgroundTextStyle": "light",

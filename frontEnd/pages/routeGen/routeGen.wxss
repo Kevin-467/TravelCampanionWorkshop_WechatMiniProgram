@@ -16,7 +16,6 @@
     font-size: 30rpx;
     color: #999;
     text-align: center;
-
 }
 
 .container {
