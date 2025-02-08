@@ -15,34 +15,13 @@
 .tip {
     font-size: 30rpx;
     color: #999;
-    text-align: center; /* 文字居中 */
-    position: relative; 
-}
+    text-align: center;
 
-.tip::before,
-.tip::after {
-    content: "-";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 50%;
-    font-size: 30rpx; 
 }
-
-.tip::before {
-    left: 0;
-    text-align: left;
-}
-
-.tip::after {
-    right: 0;
-    text-align: right;
-}
-
 
 .container {
     padding: 20rpx;
-} 
+}
 
 .form-item {
     margin-bottom: 20rpx;
@@ -63,10 +42,11 @@
     align-items: center;
     justify-content: space-around;
 }
-  
+
 .date-selector {
     padding: 10px;
-    margin-right: 10px; /* 给两个选择器之间增加间距 */
+    margin-right: 10px;
+    /* 给两个选择器之间增加间距 */
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
@@ -78,10 +58,9 @@
     font-size: 18px;
     color: #333;
 }
-
 .btn-set {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 .btn-set button {

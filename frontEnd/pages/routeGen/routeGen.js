@@ -5,17 +5,62 @@ Page({
       startDate: '',
       endDate: '',
       budget: '',
-      preferences: ''
+      preferences: '',
     },
   
     onStartDateChange: function (e) {
+      const curDate = new Date().setHours(0,0,0,0)
+      const selectedDate = new Date(e.detail.value).setHours(0,0,0,0)
+      const endDate = new Date(this.data.startDate).setHours(0,0,0,0)
+
+      if(selectedDate < curDate){
+        wx.showModal({
+          title: '温馨提示',
+          content:'开始日期不能早于当前日期！',
+          showCancel:false
+        })
+        console.log(this.data.startDate)
+        return
+      }
+
+      if(endDate && selectedDate > endDate){
+        wx.showModal({
+          title: '温馨提示',
+          content:'开始日期不能晚于结束日期！',
+          showCancel:false
+        })
+        return
+      }
+
       this.setData({
         startDate: e.detail.value
-      });
+      })
     },
   
     // 选择结束日期
     onEndDateChange: function (e) {
+      const curDate = new Date().setHours(0,0,0,0)
+      const startDate = new Date(this.data.startDate).setHours(0,0,0,0)
+      const selectedDate = new Date(e.detail.value).setHours(0,0,0,0)
+
+      //不早于当前日期
+      if(selectedDate < curDate){
+        wx.showModal({
+          title: '温馨提示',
+          content:'结束日期不能早于当前日期！',
+          showCancel:false
+        })
+        return
+      }
+
+      if(startDate && selectedDate < startDate){
+        wx.showModal({
+          title: '温馨提示',
+          content:'结束日期不能早于开始日期！',
+          showCancel:false
+        })
+        return
+      }
       this.setData({
         endDate: e.detail.value
       });
@@ -23,20 +68,22 @@ Page({
   
     // 提交表单
     submitForm:function () {
+      console.log(this.data);
       const { destination, startDate, endDate, budget, preferences } = this.data;
   
-      if (!destination || !startDate || !endDate || !budget || !preferences) {
+      if (!destination) {
         wx.showToast({
-          title: '请填写完整的表单！',
-          icon: 'none'
+          title: '表单不能有空白！',
+          icon: 'none',
+          duration:2000
         });
         return;
       }
   
-      // 发送数据到后台
+      /* // 发送数据到后台
       wx.request({
-        url: 'https://example.com/submitForm', // 后端接口地址
-        method: 'POST',
+        url: '#', // 后端接口地址
+        method: '',
         data: {
           destination,
           startDate,
@@ -56,7 +103,12 @@ Page({
             icon: 'none'
           });
         }
-      });
+      }); */
+
+      //跳转路线生成页面
+      wx.redirectTo({
+        url:'/pages/routeGen/routeGenResult/routeGenResult'
+      })
     },
   
     // 重置表单

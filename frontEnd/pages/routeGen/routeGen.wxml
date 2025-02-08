@@ -5,7 +5,7 @@
     <!-- 旅行目的地 -->
     <view class="form-item">
       <text>旅行目的地</text>
-      <input type="text" wx:model="destination" class="input-box" placeholder="请输入旅行目的地"/>
+      <input type="text" class="input-box" placeholder="请输入旅行目的地" model:value="{{destination}}"/>
     </view>
   
     <!-- 旅行日期 -->
@@ -14,25 +14,25 @@
             <view class="date-picker">
               <!-- 开始日期和结束日期放在一行 -->
               <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange" class="date-selector">
-                <view class="picker">{{startDate?startDate:'开始日期'}}</view>
+                <view class="picker">{{startDate||'开始日期'}}</view>
               </picker>
               <text class="separator">至</text>
               <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange" class="date-selector">
-                <view class="picker">{{endDate?endDate:'结束日期'}}</view>
+                <view class="picker">{{endDate||'结束日期'}}</view>
               </picker>
             </view>
     </view>
   
     <!-- 预算 -->
     <view class="form-item">
-      <text>预算</text>
-      <input type="number" wx:model="budget" class="input-box" placeholder="请输入预算"/>
+      <text>预算(元)</text>
+      <input type="number" model:value="{{budget}}" class="input-box" placeholder="请输入预算"/>
     </view>
   
     <!-- 旅行偏好 -->
     <view class="form-item">
       <text>旅行偏好</text>
-      <textarea wx:model="preferences" class="input-box" placeholder="请输入旅行偏好" ></textarea>
+      <textarea model:value="{{preferences}}" class="input-box" placeholder="请输入旅行偏好" ></textarea>
     </view>
   
     <!-- 提交和重置按钮 -->

@@ -7,7 +7,9 @@
     "pages/teamup/teamup",
     "pages/searchResult/searchResult",
     "pages/routeGen/routeGen",
-    "pages/planGen/planGen"
+    "pages/planGen/planGen",
+    "pages/login/login",
+    "pages/routeGen/routeGenResult/routeGenResult"
   ],
   "window": {
     "backgroundTextStyle": "light",
