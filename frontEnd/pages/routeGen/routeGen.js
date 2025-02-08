@@ -70,17 +70,46 @@ Page({
     submitForm:function () {
       console.log(this.data);
       const { destination, startDate, endDate, budget, preferences } = this.data;
-  
+
       if (!destination) {
-        wx.showToast({
-          title: '表单不能有空白！',
-          icon: 'none',
-          duration:2000
+        wx.showModal({
+          title: '请填写旅游目的地！',
+          showCancel:false
         });
         return;
       }
-  
-      /* // 发送数据到后台
+      if (!startDate) {
+        wx.showModal({
+          title: '请选择开始日期！',
+          showCancel:false
+        });
+        return;
+      }
+      if (!endDate) {
+        wx.showModal({
+          title: '请选择结束日期！',
+          showCancel:false
+        });
+        return;
+      }
+
+      if (!budget) {
+        wx.showModal({
+          title: '请填写预算！',
+          showCancel:false
+        });
+        return;
+      }
+      if (!preferences) {
+        wx.showModal({
+          title: '请填写旅行偏好！',
+          showCancel:false
+        });
+        return;
+      }
+
+      /* 
+      // 发送数据到后端 生成旅游路线 在生成过程中给予Loading转圈提示 超时弹错误提示框
       wx.request({
         url: '#', // 后端接口地址
         method: '',
@@ -105,7 +134,7 @@ Page({
         }
       }); */
 
-      //跳转路线生成页面
+      //生成路线成功才跳转页面
       wx.redirectTo({
         url:'/pages/routeGen/routeGenResult/routeGenResult'
       })
