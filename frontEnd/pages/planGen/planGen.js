@@ -48,15 +48,14 @@ Page({
     
     // 预留与后端连接的代码
    /*  wx.request({
-      url: 'https://your-backend-api.com/submit-survey', // 后端提交接口
-      method: 'POST',
+      url: '', // 后端提交接口
+      method: '',
       data: {
-        answers: this.data.answers,  // 提交用户的回答
-        userId: wx.getStorageSync('userId') // 假设从本地缓存中获取用户ID
+        
       },
       success(res) {
         if (res.data.success) {
-          console.log('问卷提交成功');
+          
         } else {
           wx.showToast({
             title: '提交失败，请稍后再试',

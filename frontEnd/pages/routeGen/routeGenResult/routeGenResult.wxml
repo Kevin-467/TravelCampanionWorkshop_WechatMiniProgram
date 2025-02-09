@@ -1,3 +1,6 @@
 <!--pages/routeGen/routeGenResult/routeGenResult.wxml-->
 <view class="page-title">旅游路线生成</view>
-<view class="tip">已为您生成以下路线</view>
+<view class="tip">{{tip}}</view>
+<view class="route-res">{{resText}}</view>
+<view class="route-res">{{resText}}</view>
+

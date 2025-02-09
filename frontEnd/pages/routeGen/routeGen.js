@@ -107,36 +107,12 @@ Page({
         });
         return;
       }
-
-      /* 
-      // 发送数据到后端 生成旅游路线 在生成过程中给予Loading转圈提示 超时弹错误提示框
-      wx.request({
-        url: '#', // 后端接口地址
-        method: '',
-        data: {
-          destination,
-          startDate,
-          endDate,
-          budget,
-          preferences
-        },
-        success: function (res) {
-          wx.showToast({
-            title: '提交成功！',
-            icon: 'success'
-          });
-        },
-        fail: function (err) {
-          wx.showToast({
-            title: '提交失败！',
-            icon: 'none'
-          });
-        }
-      }); */
-
-      //生成路线成功才跳转页面
+      
+      //携带本页面表单值跳转到生成结果页面
+      const queryStr = Object.keys(this.data).map(key => `${key}=${encodeURIComponent(this.data[key])}`).join('&')
+      console.log(queryStr)
       wx.redirectTo({
-        url:'/pages/routeGen/routeGenResult/routeGenResult'
+        url:'/pages/routeGen/routeGenResult/routeGenResult?'+queryStr
       })
     },
   

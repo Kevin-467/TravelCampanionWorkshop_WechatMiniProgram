@@ -1,43 +1,43 @@
 <!--pages/routeGen/routeGen.wxml-->
 <view class="page-title">旅游路线生成</view>
-<view class="tip">请您先填写以下表格</view>
+<view class="tip">请您先填写以下表单</view>
 <view class="container">
-    <!-- 旅行目的地 -->
-    <view class="form-item">
-      <text>旅行目的地(必填)</text>
-      <input type="text" class="input-box" placeholder="请输入旅行目的地" model:value="{{destination}}"/>
+  <!-- 旅行目的地 -->
+  <view class="form-item">
+    <text>旅行目的地(必填)</text>
+    <input type="text" class="input-box" placeholder="请输入旅行目的地" model:value="{{destination}}" />
+  </view>
+
+  <!-- 旅行日期 -->
+  <view class="form-item">
+    <text>旅行日期(必填，点击对应按钮选择)</text>
+    <view class="date-picker">
+      <!-- 开始日期和结束日期放在一行 -->
+      <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange" class="date-selector">
+        <view class="picker">{{startDate||'开始日期'}}</view>
+      </picker>
+      <text class="separator">至</text>
+      <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange" class="date-selector">
+        <view class="picker">{{endDate||'结束日期'}}</view>
+      </picker>
     </view>
-  
-    <!-- 旅行日期 -->
-    <view class="form-item">
-            <text>旅行日期(必填，点击对应按钮选择)</text>
-            <view class="date-picker">
-              <!-- 开始日期和结束日期放在一行 -->
-              <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange" class="date-selector">
-                <view class="picker">{{startDate||'开始日期'}}</view>
-              </picker>
-              <text class="separator">至</text>
-              <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange" class="date-selector">
-                <view class="picker">{{endDate||'结束日期'}}</view>
-              </picker>
-            </view>
-    </view>
-  
-    <!-- 预算 -->
-    <view class="form-item">
-      <text>预算(元) 【必填】</text>
-      <input type="number" model:value="{{budget}}" class="input-box" placeholder="请输入预算"/>
-    </view>
-  
-    <!-- 旅行偏好 -->
-    <view class="form-item">
-      <text>旅行偏好(必填)</text>
-      <textarea model:value="{{preferences}}" class="input-box" placeholder="请输入旅行偏好" ></textarea>
-    </view>
-  
-    <!-- 提交和重置按钮 -->
-    <view class="form-item btn-set">
-      <button class="submit-btn" bindtap="submitForm">提交</button>
-      <button class="reset-btn" bindtap="resetForm">重置</button>
-    </view>
+  </view>
+
+  <!-- 预算 -->
+  <view class="form-item">
+    <text>预算(元) 【必填】</text>
+    <input type="number" model:value="{{budget}}" class="input-box" placeholder="请输入预算" />
+  </view>
+
+  <!-- 旅行偏好 -->
+  <view class="form-item">
+    <text>旅行偏好(必填)</text>
+    <textarea model:value="{{preferences}}" class="input-box" placeholder="请输入旅行偏好"></textarea>
+  </view>
+
+  <!-- 提交和重置按钮 -->
+  <view class="form-item btn-set">
+    <button class="submit-btn" bindtap="submitForm">提交</button>
+    <button class="reset-btn" bindtap="resetForm">重置</button>
+  </view>
 </view>
