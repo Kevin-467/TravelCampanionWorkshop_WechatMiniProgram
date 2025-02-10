@@ -1,11 +1,11 @@
 // pages/routeGen/routeGenResult/routeGenResult.js
 Page({
   data: {
+    tip:'',
     destination: '',
     travelDays:'',
     budget: '',
     preferences: '',
-    resText:'',
     route:''
   },
 
@@ -14,7 +14,7 @@ Page({
       title: '生成路线中...',
     })
 
-    // GET/POST请求 将数据发送到后端，并从后端获取生成路线的结果( 后端接口? )
+    // GET/POST请求 将数据发送到后端，并从后端获取生成的旅游路线( 后端接口? )
     wx.request({
       url:'#', // url = ???
       data: {
@@ -29,7 +29,7 @@ Page({
         if(res.data&&res.route){
           this.setData({
             route:res.data.route,
-            resText:this.data.route
+            tip:'已为您生成旅游路线！'
           })
         } else {
           //未能生成旅游路线
@@ -60,7 +60,7 @@ Page({
       travelDays:decodeURIComponent(options.travelDays||''),
       budget: decodeURIComponent(options.budget||''),
       preferences: decodeURIComponent(options.preferences||''),
-      resText:'',
+      tip:'正在为您生成旅游路线中...',
       route:''
     })
     this.getRoute()

@@ -1,9 +1,9 @@
-<view class="page-title">旅游路线生成{{route?'结果':''}}</view>
-<view class="tip" wx:if="{{route}}">已为您生成以下路线</view>
-<view class="dash-hr" wx:if="{{route}}"></view>
-<view class="route-res" wx-if="{{route}}">
+<view class="page-title">旅游路线生成</view>
+<view class="tip">{{tip}}</view>
+<view class="dash-hr"></view>
+<view class="route-res">
     <view class="header">旅游路线：</view>
-    <view class="bd">{{resText}}</view>
+    <view class="bd">{{route}}</view>
 </view>
 
 

@@ -1,2 +1,7 @@
-<!--pages/planGen/planGenResult/planGenResult.wxml-->
-<text>pages/planGen/planGenResult/planGenResult.wxml</text>
+<view class="page-title">生成个性化旅游方案</view>
+<view class="tip">{{tip}}</view>
+<view class="dash-hr"></view>
+<view class="plan-res">
+    <view class="header">旅游方案：</view>
+    <view class="bd">{{plan}}</view>
+</view>

@@ -1,25 +1,79 @@
 // pages/planGen/planGenResult/planGenResult.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    tip:'',
+    personality: '',
+    hobbies:'',
+    budget: '',
+    preferences: '',
+    tim:'',
+    plan:''
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  getTravelPlan: function (){
+    wx.showLoading({
+      title: '个性化旅游方案生成中'
+    })
+
+    // GET/POST请求 将数据发送到后端，并从后端获取生成的个性化旅游方案( 后端接口? )
+    wx.request({
+      url:'#', // url = ???
+      data: {
+        personality: this.data.personality,
+        hobbies:this.data.hobbies,
+        budget: this.data.budget,
+        preferences: this.data.preferences,
+        travelDays:this.data.time
+      },
+      timeout:25000,
+      success:(res)=>{
+        wx.hideLoading()
+        if(res.data&&res.plan){
+          this.setData({
+            tip:'已为您生成以下旅游方案',
+            plan:res.data.plan
+          })
+        } else {
+          //未能生成旅游路线
+          wx.showModal({
+            title:'温馨提示',
+            content:'很抱歉，未能为您生成旅游方案！',
+            showCancel:false,
+            confirmText:'确认'
+          })
+        }
+      },
+      fail:(err)=>{
+        wx.hideLoading()
+        if (err.errMsg.includes('timeout')) {
+          wx.showToast({
+            title: '请求超时,未能为您生成旅游方案！',
+            icon:'none',
+            duration:2500
+          })
+        }
+      }
+    })
+  },
+
   onLoad(options) {
-
+    this.setData({
+      personality: decodeURIComponent(options.personality||''),
+      preferences: decodeURIComponent(options.preferences||''),
+      hobbies:decodeURIComponent(options.hobbies||''),
+      time: decodeURIComponent(options.time||''),
+      budget: decodeURIComponent(options.budget||''),
+      plan:'',
+      tip:'正在为您生成个性化的旅游方案！'
+    })
+    
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    this.getTravelPlan()
   },
 
   /**
