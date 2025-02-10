@@ -1,14 +1,48 @@
 .page-title {
-    margin: 10rpx;
-    height: 50rpx;
-    text-align: center;
-    font-size: 40rpx;
-    border: 1px solid #999;
-    border-radius: 25rpx;
+  margin: 10rpx;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 20px;
+  border: 1px solid #999;
+  border-radius: 12.5px;
 }
 
 .tip {
-    font-size: 30rpx;
-    color: #999;
-    text-align: center;
+  margin: 5px 0;
+  height: 30px;
+  line-height: 30px;
+  font-size: 15px;
+  color: #999;
+  text-align: center;
+}
+
+.dash-hr {
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    to right,
+    #999,
+    #999 4px,
+    transparent 8px
+  );
+  margin: 10px 0;
+}
+
+.route-res {
+  margin: 5px;
+  font-size: 20px;
+  color: #999;
+}
+
+.route-res .header {
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+.route-res .bd {
+  margin-left:5px;
+  word-wrap: break-word;
+  font-size: 19px;
+  color: #333;
 }

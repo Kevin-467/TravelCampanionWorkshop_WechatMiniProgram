@@ -35,6 +35,18 @@
     margin-top: 10rpx;
 }
 
+.value-show {
+    align-items: center;
+    font-size: 16px;
+    color: #999;
+    margin-top: 10px;
+}
+
+.value-show text {
+    color:#333;
+    font-weight: bold;
+}
+
 .date-picker {
     margin-top: 10rpx;
     display: flex;
@@ -57,6 +69,13 @@
     font-size: 18px;
     color: #333;
 }
+
+.slider-box {
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .btn-set {
     display: flex;
     justify-content: space-between;

@@ -1,31 +1,25 @@
 // pages/routeGen/routeGenResult/routeGenResult.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     destination: '',
-    startDate: '',
-    endDate: '',
+    travelDays:'',
     budget: '',
     preferences: '',
-    tip:'',
-    resText:''
+    resText:'',
+    route:''
   },
 
   getRoute: function (){
     wx.showLoading({
-      title: '生成路线中！',
+      title: '生成路线中...',
     })
 
-    //GET请求 将数据发送到后端，并从后端获取生成路线的结果
+    // GET/POST请求 将数据发送到后端，并从后端获取生成路线的结果( 后端接口? )
     wx.request({
-      url:'#',
+      url:'#', // url = ???
       data: {
         destination: this.data.destination,
-        startDate: this.data.startDate,
-        endDate: this.data.endDate,
+        travelDays:this.options.travelDays,
         budget: this.data.budget,
         preferences: this.data.preferences,
       },
@@ -34,9 +28,8 @@ Page({
         wx.hideLoading()
         if(res.data&&res.route){
           this.setData({
-            tip:'已为您生成以下路线',
             route:res.data.route,
-            resText:`旅游路线：${this.data.route}`
+            resText:this.data.route
           })
         } else {
           //未能生成旅游路线
@@ -63,14 +56,13 @@ Page({
 
   onLoad(options) {
     this.setData({
-      tip:'已为您生成以下路线',
       destination: decodeURIComponent(options.destination||''),
-      startDate: decodeURIComponent(options.startDate||''),
-      endDate: decodeURIComponent(options.endDate||''),
+      travelDays:decodeURIComponent(options.travelDays||''),
       budget: decodeURIComponent(options.budget||''),
-      preferences: decodeURIComponent(options.preferences||'')
+      preferences: decodeURIComponent(options.preferences||''),
+      resText:'',
+      route:''
     })
-
     this.getRoute()
   },
 
