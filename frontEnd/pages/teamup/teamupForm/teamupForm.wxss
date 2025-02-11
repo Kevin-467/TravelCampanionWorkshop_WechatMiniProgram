@@ -1,0 +1,116 @@
+page {
+    color:#333;
+}
+
+.teamup-form {
+    padding: 10px;
+    padding-top: 0;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px
+}
+
+.tip {
+    margin: 10px 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #999;
+  }
+
+.form-item {
+    margin: 20px 0;
+}
+
+.label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+.input,
+.textarea {
+    width: 94%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.input:focus,
+.textarea:focus {
+    border-color: #4CAF50;
+}
+
+.textarea {
+    height: 130px;
+    resize: none;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+}
+
+.radio-item text {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.date-picker {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.picker-item {
+    padding: 15px;
+    width: 80%;
+    font-size: 15px; 
+    text-align: center;
+    background-color: #e2e0e0;
+    border: 1px solid #b7b7b7;
+    border-radius: 8px;
+}
+
+.slider-value {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.slider-value text {
+    color:#4CAF50
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    width: 48%;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+button:active {
+    opacity: 0.9;
+}

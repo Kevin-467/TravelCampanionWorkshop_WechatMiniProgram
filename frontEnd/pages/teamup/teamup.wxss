@@ -1,58 +1,11 @@
-/* pages/teamup/teamup.wxss */
-.page-title {
-    margin: 10rpx auto;
-    font-size: 23px;
-    font-weight: bold;
-    text-align: center;
+page {
+    color: #333;
 }
 
-.teamup-form {
+.tip {
     margin: 10px 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #999;
 }
-
-.personal-info > view {
-    margin: 20px 10px;
-}
-
-.personal-info .per-info-title {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.teamup-form {
-    font-size: 20px;
-}
-
-.inputBox {
-    display: flex;
-    margin: 10px 0;
-    font-size: 20px;
-    align-items: center;
-}
-
-.personal-info text {
-    width: 25%;
-    font-weight: normal;
-}
-
-input {
-    margin-left: 10px;
-    width: 75%;
-    height: 40px;
-    border:1rpx solid #000;
-}
-
-.gender {
-    display: flex;
-}
-
-.gender .gender-radio-btn {
-    display: flex;
-    margin: 0 35px;
-}
-
-.time {
-
-}
-
-

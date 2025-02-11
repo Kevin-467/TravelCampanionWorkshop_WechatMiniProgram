@@ -10,7 +10,8 @@
     "pages/planGen/planGen",
     "pages/login/login",
     "pages/routeGen/routeGenResult/routeGenResult",
-    "pages/planGen/planGenResult/planGenResult"
+    "pages/planGen/planGenResult/planGenResult",
+    "pages/teamup/teamupForm/teamupForm"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,7 +37,7 @@
         "selectedIconPath": "/images/navbar/share_active.png"
       },
       {
-        "pagePath": "pages/teamup/teamup",
+        "pagePath": "pages/teamup/teamupForm/teamupForm",
         "text": "组队",
         "iconPath": "/images/navbar/teamup.png",
         "selectedIconPath": "/images/navbar/teamup_active.png"

@@ -1,0 +1,52 @@
+<view class="teamup-form">
+    <view class="form-title">组 队</view>
+    <view class="tip">------------------ 请您先填写以下信息 ----------------</view>
+    <!-- 个人信息 -->
+    <view class="form-item">
+        <text class="label">姓名：</text>
+        <input class="input" placeholder="请输入您的姓名" model:value="{{ name }}" />
+    </view>
+
+    <view class="form-item">
+        <text class="label">性别：</text>
+        <radio-group bindchange="handleChoice" class="radio-group">
+            <label wx:for="{{ genderOptions }}" wx:key="id" class="radio-item">
+                <radio value="{{ item.gender }}" class="radio" checked="{{ gender === item.gender }}">
+                    <text>{{item.gender}}</text></radio>
+            </label>
+        </radio-group>
+    </view>
+
+    <!-- 时间选择：开始日期和结束日期 -->
+    <view class="form-item">
+        <text class="label">旅行时间：</text>
+        <view class="date-picker">
+            <picker mode="date" start="{{ currentDate }}" bindchange="onStartDateChange">
+                <view class="picker-item">{{ startDateText }}</view>
+            </picker>
+            <text class="label">至</text>
+            <picker mode="date" start="{{ currentDate }}" bindchange="onEndDateChange">
+                <view class="picker-item">{{ endDateText }}</view>
+            </picker>
+        </view>
+    </view>
+
+    <view class="form-item">
+        <text class="label">预算(元)：</text>
+        <view class="slider-container">
+            <slider min="0" max="10000" step="100" show-value model:value="{{ budget }}" bindchange="onBudgetChange">
+            </slider>
+            <text class="slider-value" hidden="{{ budget === 0 }}">当前选择的预算：<text>{{ budget }}</text>元</text>
+        </view>
+    </view>
+
+    <view class="form-item">
+        <text class="label">旅游偏好：</text>
+        <textarea class="textarea" placeholder="请输入您的旅游偏好" model:value="{{ preference }}"></textarea>
+    </view>
+
+    <view class="button-container">
+        <button class="btn-submit" type="primary" bindtap="submitForm">提 交</button>
+        <button class="btn-reset" type="warn" bindtap="resetForm">重 置</button>
+    </view>
+</view>
