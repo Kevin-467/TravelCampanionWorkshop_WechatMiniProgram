@@ -1,0 +1,62 @@
+<view class="contanier">
+    <view class="title">旅伴推荐</view>
+    <view class="tip">一起出发，共享欢乐！</view>
+    <view class="box" wx:if="{{partnerList}}">
+        <view class="card" wx:for="{{partnerList}}" wx:key="id">
+            <view class="left">
+                <image src="{{item.avatar}}" alt="" class="avatar"></image>
+            </view>
+            <view class="right">
+                <view class="info">
+                    <view class="name">{{item.nickname}}</view>
+                    <view class="detail">{{item.preference}}</view>
+                </view>
+                <button class="confirm-btn" bindtap="setTeamUp">加入TA发起的组队</button>
+            </view>
+        </view>
+    </view>
+
+    <view class="box empty-box" wx:else>
+        {{emptyResultText}}
+    </view>
+      
+    <view class="title" hidden="{{hideForm}}">没有找到心仪的伙伴?</view>
+    <view class="tip" hidden="{{hideForm}}">(以下内容无需填写，点击按钮发布组队)</view>
+    <view class="form" hidden="{{hideForm}}">
+        <view class="form-item">
+            <text class="label">昵称：</text>
+            <input class="input" placeholder="" model:value="{{ name }}" disabled/>
+        </view>
+    
+        <view class="form-item">
+            <text class="label">性别：</text>
+            <radio-group bindchange="handleChoice" class="radio-group">
+                <label wx:for="{{ genderOptions }}" wx:key="id" class="radio-item">
+                    <radio value="{{ item.gender }}" class="radio" checked="{{ gender === item.gender }}" disabled>
+                        <text>{{item.gender}}</text></radio>
+                </label>
+            </radio-group>
+        </view>
+
+        <view class="form-item">
+            <text class="label">旅行时间：</text>
+            <view class="date-box">
+                <view class="date-item">{{ startDate }} </view>
+                <text class="label">至</text>
+                <view class="date-item">{{ endDate }}</view>
+            </view>
+        </view>
+
+        <view class="form-item">
+            <text class="label">预算(元)：</text>
+            <input class="input" placeholder="" model:value="{{ budget }}" disabled/>
+        </view>
+    
+        <view class="form-item">
+            <text class="label">旅游偏好：</text>
+            <textarea class="textarea" placeholder="" model:value="{{ preference }}" disabled></textarea>
+        </view>
+    
+        <button class="btn-submit" type="primary">发布组队</button>
+    </view>
+</view>

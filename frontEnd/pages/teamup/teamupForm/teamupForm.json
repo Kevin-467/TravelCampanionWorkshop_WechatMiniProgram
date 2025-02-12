@@ -1,5 +1,6 @@
 {
   "usingComponents": {},
   "backgroundColor": "#f9f9f9",
-  "backgroundTextStyle": "light"
+  "backgroundTextStyle": "light",
+  "navigationBarTitleText": "组队"
 }

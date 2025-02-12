@@ -5,7 +5,6 @@
     "pages/chatspace/chatspace",
     "pages/share/share",
     "pages/teamup/teamup",
-    "pages/searchResult/searchResult",
     "pages/routeGen/routeGen",
     "pages/planGen/planGen",
     "pages/login/login",

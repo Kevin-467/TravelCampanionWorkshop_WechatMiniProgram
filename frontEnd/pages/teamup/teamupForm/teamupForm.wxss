@@ -16,15 +16,6 @@ page {
     text-align: center;
     margin-top: 5px
 }
-
-.tip {
-    margin: 10px 0;
-    height: 20px;
-    line-height: 20px;
-    font-size: 15px;
-    color: #999;
-  }
-
 .form-item {
     margin: 20px 0;
 }
@@ -89,8 +80,9 @@ page {
 }
 
 .slider-value {
-    font-size: 14px;
     margin-top: 10px;
+    font-size: 14px;
+    color:#999;
 }
 
 .slider-value text {

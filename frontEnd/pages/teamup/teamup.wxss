@@ -5,7 +5,186 @@ page {
 .tip {
     margin: 10px 0;
     height: 20px;
+    text-align: center;
     line-height: 20px;
     font-size: 15px;
     color: #999;
 }
+
+
+
+.contanier .title {
+    height: 20px;
+    margin: 5px 5px;
+    padding: 5px 0;
+    text-align: center;
+    line-height: 20px;
+    font-size: 20px;
+    color:#95db09;
+    border: 1px solid #95db09;
+    border-radius: 10px;
+}
+
+.contanier .box {
+    margin: 10px 0;
+    background-color: #fff;
+}
+
+.contanier .box .card {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius:10px;
+    height: 80px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fafafa;
+}
+
+.contanier .card .left {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contanier .card .left .avatar {
+    width: 40px; 
+    height: 40px;
+    border:1px solid #999;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.contanier .card .right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding-left: 10px; 
+}
+
+.contanier .card .info {
+    display: flex;
+    width:140px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.contanier .card .info .name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contanier .card .info .detail {
+    height: 30px;
+    word-wrap: break-word;
+    font-size: 12px;
+    color: #777;
+}
+
+.contanier .card .right .confirm-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: none;
+    background-color: #34b7f1;
+    color: #ffffff;
+}
+
+.contanier .empty-box {
+    display: flex;
+    padding:10px;
+    height: 120px;
+    background-color: #cfcdcd;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    font-weight: bold;
+    border:1px solid #95db09;
+}
+
+.contanier .form {
+    margin: 5px 10px;
+}
+
+.form-item {
+    margin: 20px 0;
+}
+
+.label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+.input,
+.textarea {
+    width: 94%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #e2e0e0;
+    transition: border-color 0.3s;
+}
+
+.input:focus,
+.textarea:focus {
+    border-color: #4CAF50;
+}
+
+.textarea {
+    height: 100px;
+    resize: none;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+}
+
+.radio-item text {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.date-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.date-item {
+    padding: 15px;
+    width: 25%;
+    font-size: 15px; 
+    text-align: center;
+    background-color: #e2e0e0;
+    border: 1px solid #b7b7b7;
+    border-radius: 8px;
+}
+
+button {
+    width: 75%;
+    height:20%;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+button:active {
+    opacity: 0.9;
+}
+

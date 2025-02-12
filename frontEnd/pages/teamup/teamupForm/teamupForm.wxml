@@ -1,10 +1,9 @@
 <view class="teamup-form">
-    <view class="form-title">组 队</view>
-    <view class="tip">------------------ 请您先填写以下信息 ----------------</view>
+    <view class="form-title">一起组队吧！</view>
     <!-- 个人信息 -->
     <view class="form-item">
-        <text class="label">姓名：</text>
-        <input class="input" placeholder="请输入您的姓名" model:value="{{ name }}" />
+        <text class="label">昵称：</text>
+        <input class="input" placeholder="" model:value="{{ name }}" type="nickname"/>
     </view>
 
     <view class="form-item">
@@ -46,7 +45,7 @@
     </view>
 
     <view class="button-container">
-        <button class="btn-submit" type="primary" bindtap="submitForm">提 交</button>
+        <button class="btn-submit" type="primary" bindtap="submitForm" open-type="get" >提 交</button>
         <button class="btn-reset" type="warn" bindtap="resetForm">重 置</button>
     </view>
 </view>

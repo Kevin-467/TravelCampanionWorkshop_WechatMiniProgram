@@ -13,6 +13,7 @@ Page({
     endDate: "",
     startDateText: "",
     endDateText: "",
+    avatar:""
   },
 
   // 性别选择变化
@@ -108,8 +109,7 @@ Page({
       budget,
       preference
     }
-    const queryStr = Object.keys(queryObj).map(key => `${key}=${encodeURIComponent(queryObj[key])}`)
-
+    const queryStr = Object.keys(queryObj).map(key => `${key}=${encodeURIComponent(queryObj[key])}`).join('&')
     wx.redirectTo({
       url:`/pages/teamup/teamup?${queryStr}`
     })
