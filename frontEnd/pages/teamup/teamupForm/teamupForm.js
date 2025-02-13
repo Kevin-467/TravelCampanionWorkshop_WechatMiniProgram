@@ -5,15 +5,11 @@ Page({
       { id: 1, gender: "男", value: 0 },
       { id: 2, gender: "女", value: 1 },
     ],
-    name: "",
+    nickname: "",
     gender: "",
-    budget: "",
+    travelDays:0,
+    budget: 0,
     preference: "",
-    startDate: "",
-    endDate: "",
-    startDateText: "",
-    endDateText: "",
-    avatar:""
   },
 
   // 性别选择变化
@@ -24,88 +20,30 @@ Page({
     });
   },
 
-  // 开始日期选择变化
-  onStartDateChange: function (e) {
-    const startDate = new Date(e.detail.value).setHours(0, 0, 0, 0);
-    const endDate = this.data.endDate;
-    //不早于当前日期
-    if (startDate < new Date().setHours(0, 0, 0, 0)) {
-      wx.showToast({
-        title: "所选开始日期不能早于当前日期!",
-        icon: "none",
-        duration: 2000,
-      });
-      return;
-    }
-
-    if (endDate && new Date(endDate).setHours(0, 0, 0, 0) < startDate) {
-      wx.showToast({
-        title: "所选开始日期不能晚于结束日期!",
-        icon: "none",
-        duration: 2000,
-      });
-      return;
-    }
-
+  //多个滑块共用此函数，用所点击滑块的id来区别设置的数据项
+  onSliderChange(e) {
+    const typeId = e.target.id;
     this.setData({
-      startDate: e.detail.value,
-      startDateText: e.detail.value,
-    });
-  },
-
-  // 结束日期选择变化
-  onEndDateChange: function (e) {
-    const endDate = new Date(e.detail.value).setHours(0, 0, 0, 0);
-    const startDate = this.data.startDate;
-    //不早于当前日期
-    if (endDate < new Date().setHours(0, 0, 0, 0)) {
-      wx.showToast({
-        title: "所选结束日期不能早于当前日期!",
-        icon: "none",
-        duration: 2000,
-      });
-      return;
-    }
-
-    if (startDate && new Date(startDate).setHours(0, 0, 0, 0) > endDate) {
-      wx.showToast({
-        title: "所选结束日期不能早于开始日期!",
-        icon: "none",
-        duration: 2000,
-      });
-      return;
-    }
-
-    this.setData({
-      endDate: e.detail.value,
-      endDateText: e.detail.value,
-    });
-  },
-
-  // 预算变化
-  onBudgetChange: function (e) {
-    const budget = e.detail.value;
-    this.setData({
-      budget: budget,
-    });
+      [typeId]: e.detail.value
+    })
   },
 
   submitForm() {
-    const {name,gender,startDate,endDate,budget,preference} = this.data
+    const {nickname,gender,travelDays,budget,preference} = this.data
     
-    if(!name||!gender||!startDate||!endDate||budget === 0||!preference){
+    if(!nickname||!gender||travelDays === 0||budget === 0||!preference){
      wx.showToast({
-        title: '请您先填写所有信息！',
+        title: '请您先填写完所有信息！',
         icon:'none',
         duration:2000
       })
       return
     }
 
-    const queryObj = {name,
+    const queryObj = {
+      nickname,
       gender,
-      startDate,
-      endDate,
+      travelDays,
       budget,
       preference
     }
@@ -117,26 +55,23 @@ Page({
 
   resetForm() {
     this.setData({
-      name: '',
+      nickname: "",
       gender: "",
+      travelDays:0,
       budget: 0,
-      preference: '',
-      startDate: '',
-      endDate: '',
-      startDateText: '请选择开始日期',
-      endDateText: '请选择结束日期',
+      preference: "",
     })
   },
 
   //生命周期函数--监听页面加载
   onLoad(options) {
     this.setData({
-      startDateText: "请选择开始日期",
-      endDateText: "请选择结束日期",
+      travelDays:0,
       budget: 0,
     });
   },
-  ///生命周期函数--监听页面初次渲染完成
+
+  //生命周期函数--监听页面初次渲染完成
   onReady() {},
 
   //生命周期函数--监听页面显示

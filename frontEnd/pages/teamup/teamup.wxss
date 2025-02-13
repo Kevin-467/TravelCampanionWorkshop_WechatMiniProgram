@@ -11,8 +11,6 @@ page {
     color: #999;
 }
 
-
-
 .contanier .title {
     height: 20px;
     margin: 5px 5px;
@@ -53,7 +51,7 @@ page {
     width: 40px; 
     height: 40px;
     border:1px solid #999;
-    border-radius: 50%;
+    border-radius: 10px;
     object-fit: cover;
 }
 
@@ -81,8 +79,6 @@ page {
 }
 
 .contanier .card .info .detail {
-    height: 30px;
-    word-wrap: break-word;
     font-size: 12px;
     color: #777;
 }
@@ -110,6 +106,18 @@ page {
 
 .contanier .form {
     margin: 5px 10px;
+}
+
+.contanier .picture {
+    margin-left: 10px;
+    width:100px;
+    height:100px;
+    font-size: 16px;
+    text-align: center;
+    color:#333;
+    border:5px solid #999;
+    border-radius: 10px;
+    background-image: url('https://img-storage-1336210390.cos.ap-guangzhou.myqcloud.com/add%20.png');
 }
 
 .form-item {

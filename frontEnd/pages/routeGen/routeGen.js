@@ -18,7 +18,7 @@ Page({
   // 提交表单
   submitForm: function () {
     console.log(this.data);
-    const { destination, travelDays, budget, preferences } = this.data;
+    const { destination, travelDays, preferences } = this.data;
 
     if (!destination) {
       wx.showToast({
@@ -37,14 +37,6 @@ Page({
       return
     }
 
-    if (budget === 0) {
-      wx.showToast({
-        title: "请选择预算！",
-        icon:'none',
-        duration:2000
-      })
-      return
-    }
     if (!preferences) {
       wx.showToast({
         title: "请填写旅行偏好！",

@@ -1,34 +1,31 @@
 Page({
-    data:{
-        genderOptions: [
-            { id: 1, gender: "男", value: 0 },
-            { id: 2, gender: "女", value: 1 }
-        ],
-        name:'',
-        gender:'',
-        startDate:'',
-        endDate:'',
-        budget:'',
-        /* partnerList:[
-            {id:1,avatar:'../../images/homePage/旅行.png',nickname:'kevinchan042108',preference:'亲近大自然'},
-            {id:2,avatar:'../../images/homePage/旅游_路线.png',nickname:'kevinchan',preference:'喜欢越野冒险，探索未知'}
-        ], */
-        partnerList:'',
-        tip:'',
-        emptyResultText:'',
-        hideForm:''
-    },
+  data: {
+    genderOptions: [
+      { id: 1, gender: "男", value: 0 },
+      { id: 2, gender: "女", value: 1 },
+    ],
+    picUrl: "",
+    nickname: "",
+    gender: "",
+    travelDays: 0,
+    budget: "",
+    partnerList: "",
+    tip: "",
+    emptyResultText: "",
+    showAddPicBox:true,
+    hideForm: "",
+  },
 
-    findPartner: function() {
-        wx.showLoading({
-            title:'寻找旅伴中....',
-        })
-        
-        wx.request({
+  findPartner: function () {
+    wx.showLoading({
+      title: "寻找旅伴中....",
+    });
+
+    /*         wx.request({
             url:'#',
             method:'GET',
             data:{
-                name:this.data.name,
+                nickname:this.data.nickname,
                 gender:this.data.gender,
                 startDate:this.data.startDate,
                 endDate:this.data.endDate,
@@ -63,21 +60,185 @@ Page({
                     hideForm :false
                 })
             }
+        }) */
+    setTimeout(() => {
+      wx.hideLoading();
+      this.setData({
+        partnerList: [
+          {
+            id: 1,
+            picUrl: "../../images/homePage/旅行.png",
+            initator: "kevinchan042108", //组队发起者
+            createTime: "2025-1-20 17:45:30", //组队发起时间
+            travelDays: 8, //计划旅行天数
+            budget: 2500, //组队预算
+            preference: "亲近大自然", //发起者旅游偏好
+          },
+          {
+            id: 2,
+            picUrl: "../../images/homePage/旅游_路线.png",
+            initator: "kevinchan",
+            createTime: "2025-1-20 17:45:30",
+            travelDays: 8,
+            budget: 2000,
+            preference: "喜欢越野冒险，探索未知",
+          },
+        ],
+        hideForm: false,
+      });
+    }, 5000);
+  },
+
+  //防抖/节流优化？
+  joinTeamup(evt) {
+    //流程
+    const { id } = evt.target.dataset
+    const { nickname } = this.data
+    wx.showLoading({
+      title: "正在组队中",
+    });
+
+    /*  wx.request({
+        url:'#',
+        method:'PUT',//POST/PUT ?
+        data:{
+            id,//组队编号
+            participant:nickname //搭子昵称
+        },
+        timeout:10000,
+        success:(res)=>{
+            wx.hideLoading()
+            wx.showToast({
+                title:'组队成功！',
+                image:'../../images/成功.png'
+            })
+        },
+        fail:(err)=>{
+            console.log(err)
+            wx.hideLoading()
+            wx.showToast({
+                title:'组队失败！',
+                icon:'error'
+            })
+        }
+    }) */
+
+    //组队成功效果
+    setTimeout(() => {
+      wx.hideLoading();
+      wx.showToast({
+        title: "组队成功！",
+        icon:'success'
+      })
+      wx.switchTab({
+        url:'/pages/chatspace/chatspace'
+      })
+    }, 5000)
+  },
+
+  createTeamup() {
+    const {avatar,initator,travelDays,budget,preference} = this.data
+    wx.showLoading({
+      title:'正在发布中'
+    })
+
+    /* wx.request({
+      url:'#',
+      method:'POST',
+      data:{
+        picUrl,
+        initator,
+        travelDays,
+        budget,
+        preference
+      },
+      timeout:10000,
+      success:(res)=>{
+        wx.hideLoading()
+        wx.showToast({
+          title:'发布成功！',
+          icon:'success'
         })
-    },
-
-    onLoad(options){
-        Object.keys(options).forEach(key => this.setData({
-            [key]:decodeURIComponent(options[key])
-        }))
-        this.setData({
-            hideForm:true,
-            emptyResultText:'正在匹配中...'
+        wx.switchTab({
+          url:'/pages/chatspace/chatspace'
         })
-        this.findPartner()
-    },
+      },
+      fail:(err)=>{
+        console.log(err)
+        wx.hideLoading()
+        wx.showToast({
+          title:'发布失败！',
+          icon:'error'
+        })
+      }
+    }) */
 
-    onReady(){
+    setTimeout(()=>{
+      wx.hideLoading()
+      wx.showToast({
+        title: "发布成功！",
+        icon:'success'
+      });
+      wx.switchTab({
+        url:'/pages/chatspace/chatspace'
+      })
+    },5000)
+  },
 
-    },
+  
+  onpicChoose() {
+    const that = this
+    wx.chooseMedia({
+      count:1,
+      mediaType:['image'],
+      sourceType:['album', 'camera'],
+      sizeType:['original'],
+      success (res)  {
+        const {tempFilePath} = res.tempFiles[0]
+
+        //上传图片到服务器 待实现
+        /* wx.uploadFile({
+          url:'#',
+          filePath:tempFilePath,
+          name:'teamup-image-file',
+          header:{},
+          formData:{},
+          timeout:5000,
+          success:(res)=>{
+            if(res.statusCode === 200){
+              const {picUrl} = res.data.data
+              that.setData({
+                picUrl
+                showAddPicBox:false
+              })
+            }
+          },
+          fail:(err)=>{
+            console.log(err)
+          }
+        }) */
+
+        that.setData({
+          picUrl:tempFilePath,
+          showAddPicBox:false
+        })
+      },
+      fail (err) {
+        console.log(err)
+      }
+    })
+  },
+
+  onLoad(options) {
+    Object.keys(options).forEach((key) =>
+      this.setData({
+        [key]: decodeURIComponent(options[key]),
+      })
+    )
+    this.setData({
+      hideForm: true,
+      emptyResultText: "正在匹配中...",
+    })
+    this.findPartner()
+  }
 })

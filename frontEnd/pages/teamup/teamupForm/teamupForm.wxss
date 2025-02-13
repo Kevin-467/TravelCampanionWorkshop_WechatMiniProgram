@@ -85,10 +85,6 @@ page {
     color:#999;
 }
 
-.slider-value text {
-    color:#4CAF50
-}
-
 .button-container {
     display: flex;
     justify-content: space-between;

@@ -4,14 +4,18 @@
     <view class="box" wx:if="{{partnerList}}">
         <view class="card" wx:for="{{partnerList}}" wx:key="id">
             <view class="left">
-                <image src="{{item.avatar}}" alt="" class="avatar"></image>
+                <image src="{{item.picUrl}}" alt="" class="avatar"></image>
             </view>
             <view class="right">
                 <view class="info">
-                    <view class="name">{{item.nickname}}</view>
-                    <view class="detail">{{item.preference}}</view>
+                    <view class="name">{{item.initator}}</view>
+                    <view class="detail">
+                        <view>{{item.preference}}</view>
+                        <view style="margin-top:5px">旅行天数：<text style="color:#4caf50;font-weight: bold;">{{item.travelDays}}</text> 天</view>
+                        <view>预算：<text style="color:#f68719;font-weight:bold;">{{item.budget}}</text> 元</view>
+                    </view>
                 </view>
-                <button class="confirm-btn" bindtap="setTeamUp">加入TA发起的组队</button>
+                <button class="confirm-btn" bindtap="joinTeamup" data-id="{{item.id}}">加入TA发起的组队</button>
             </view>
         </view>
     </view>
@@ -21,15 +25,21 @@
     </view>
       
     <view class="title" hidden="{{hideForm}}">没有找到心仪的伙伴?</view>
-    <view class="tip" hidden="{{hideForm}}">(以下内容无需填写，点击按钮发布组队)</view>
+    <view class="tip" hidden="{{hideForm}}">请确认组队内容，点击按钮发布组队</view>
     <view class="form" hidden="{{hideForm}}">
         <view class="form-item">
-            <text class="label">昵称：</text>
-            <input class="input" placeholder="" model:value="{{ name }}" disabled/>
+            <text class="label">封面(选填)</text>
+            <view class="picture" bindtap="onpicChoose" wx:if="{{showAddPicBox}}"></view>
+            <image class="picture" src="{{picUrl}}"  bindtap="onpicChoose" style="border: 1px solid #999; background-image: none;" wx:else></image>
+        </view>
+        
+        <view class="form-item">
+            <text class="label">昵称</text>
+            <input class="input" placeholder="" model:value="{{ nickname }}" disabled/>
         </view>
     
         <view class="form-item">
-            <text class="label">性别：</text>
+            <text class="label">性别</text>
             <radio-group bindchange="handleChoice" class="radio-group">
                 <label wx:for="{{ genderOptions }}" wx:key="id" class="radio-item">
                     <radio value="{{ item.gender }}" class="radio" checked="{{ gender === item.gender }}" disabled>
@@ -39,24 +49,20 @@
         </view>
 
         <view class="form-item">
-            <text class="label">旅行时间：</text>
-            <view class="date-box">
-                <view class="date-item">{{ startDate }} </view>
-                <text class="label">至</text>
-                <view class="date-item">{{ endDate }}</view>
-            </view>
+            <text class="label">计划旅游天数 (单位:天)</text>
+            <input class="input" placeholder="" model:value="{{ travelDays }}" disabled/>
         </view>
 
         <view class="form-item">
-            <text class="label">预算(元)：</text>
+            <text class="label">预算(元)</text>
             <input class="input" placeholder="" model:value="{{ budget }}" disabled/>
         </view>
     
         <view class="form-item">
-            <text class="label">旅游偏好：</text>
+            <text class="label">旅游偏好</text>
             <textarea class="textarea" placeholder="" model:value="{{ preference }}" disabled></textarea>
         </view>
     
-        <button class="btn-submit" type="primary">发布组队</button>
+        <button class="btn-submit" type="primary" bindtap="createTeamup">发布组队</button>
     </view>
 </view>
