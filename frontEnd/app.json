@@ -30,12 +30,6 @@
         "selectedIconPath": "/images/navbar/home_active.png"
       },
       {
-        "pagePath": "pages/share/share",
-        "text": "游记",
-        "iconPath": "/images/navbar/share.png",
-        "selectedIconPath": "/images/navbar/share_active.png"
-      },
-      {
         "pagePath": "pages/teamup/teamupForm/teamupForm",
         "text": "组队",
         "iconPath": "/images/navbar/teamup.png",

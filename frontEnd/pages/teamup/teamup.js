@@ -1,3 +1,6 @@
+//默认图片路径
+const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+
 Page({
   data: {
     genderOptions: [
@@ -71,8 +74,8 @@ Page({
             initator: "kevinchan042108", //组队发起者
             createTime: "2025-1-20 17:45:30", //组队发起时间
             travelDays: 8, //计划旅行天数
-            budget: 2500, //组队预算
-            preference: "亲近大自然", //发起者旅游偏好
+            budget: 2000, //组队预算
+            preference: "亲近大自然,远离喧嚣,喜欢宁静", //发起者旅游偏好
           },
           {
             id: 2,
@@ -81,7 +84,7 @@ Page({
             createTime: "2025-1-20 17:45:30",
             travelDays: 8,
             budget: 2000,
-            preference: "喜欢越野冒险，探索未知",
+            preference: "亲近大自然,远离闹市喧嚣",
           },
         ],
         hideForm: false,
@@ -125,17 +128,19 @@ Page({
 
     //组队成功效果
     setTimeout(() => {
-      wx.hideLoading();
+      wx.hideLoading()
       wx.showToast({
         title: "组队成功！",
-        icon:'success'
+        icon:'success',
+        duration:2000
       })
-      wx.switchTab({
+      setTimeout(()=>wx.switchTab({
         url:'/pages/chatspace/chatspace'
-      })
-    }, 5000)
+      }),2000)
+    }, 3000)
   },
 
+  //如未选择照片，则上传默认图片
   createTeamup() {
     const {avatar,initator,travelDays,budget,preference} = this.data
     wx.showLoading({
@@ -177,15 +182,15 @@ Page({
       wx.hideLoading()
       wx.showToast({
         title: "发布成功！",
-        icon:'success'
+        icon:'success',
+        duration:1000
       });
-      wx.switchTab({
+      setTimeout(()=>wx.switchTab({
         url:'/pages/chatspace/chatspace'
-      })
-    },5000)
+      }),2000)
+    },3000)
   },
 
-  
   onpicChoose() {
     const that = this
     wx.chooseMedia({
@@ -236,6 +241,7 @@ Page({
       })
     )
     this.setData({
+      avatar:defaultAvatarUrl,
       hideForm: true,
       emptyResultText: "正在匹配中...",
     })

@@ -1,7 +1,26 @@
 <view class="page-title">生成个性化旅游方案</view>
-<view class="tip">{{tip}}</view>
-<view class="dash-hr"></view>
+
+<!-- tip区域 -->
+<view class="tip" wx:if="{{tipShow}}">
+    <text>{{tip}}</text>
+    <view class="dash-hr"></view>
+</view>
+
+<!-- 旅游方案结果展示区 -->
 <view class="plan-res">
-    <view class="header">旅游方案：</view>
-    <view class="bd">{{plan}}</view>
+    <view class="header">旅游方案</view>
+    <view class="res-box" wx:if="{{plan}}">
+        <view class="budget">
+            <text style="font-weight: bold;">预计花销：</text>
+            <text style="font-weight: bold;color:rgb(247, 107, 7)">{{plan.budget}}</text> 
+            元
+        </view>
+        <view class="detail">
+            <view class="card" wx:for="{{plan.arrange}}" wx:key="id">
+                <view class="title">{{item.title}}</view>
+                <view class="detail"><text style="font-weight: bold;">行程：</text>{{item.detail}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="res-box empty-result" wx:elif="{{!plan&&emptyBoxShow}}">暂无符合需求的旅游方案!</view>
 </view>

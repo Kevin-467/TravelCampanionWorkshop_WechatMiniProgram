@@ -8,7 +8,7 @@
   
       <!-- 单选题 -->
       <view wx:if="{{item.type === 'single'}}">
-        <radio-group bindchange="handleChoice" data-type="{{item.category}}" data-num="1" class="radio-group">
+        <radio-group bindchange="handleChoice" data-type="{{item.category}}" class="radio-group">
           <label wx:for="{{item.options}}" wx:key="item" class="radio-label">
             <radio value="{{item}}" class="radio">{{item}}</radio>
           </label>
@@ -17,7 +17,7 @@
   
       <!-- 多选题 -->
       <view wx:elif="{{item.type === 'multiple'}}">
-        <checkbox-group bindchange="handleChoice" data-type="{{item.category}}" data-num="2" class="checkbox-group">
+        <checkbox-group bindchange="handleChoice" data-type="{{item.category}}" class="checkbox-group">
           <label wx:for="{{item.options}}" wx:key="item" class="checkbox-label">
             <checkbox value="{{item}}" class="checkbox">{{item}}</checkbox>
           </label>

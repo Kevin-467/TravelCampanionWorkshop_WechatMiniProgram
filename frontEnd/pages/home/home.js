@@ -33,14 +33,6 @@ Page({
         },
         {
           id:2,
-          name:'更多游记',
-          className:'route-gen',
-          imgUrl:'../../images/homePage/游记.png',
-          navUrl:'/pages/share/share',
-          openType:'switchTab'
-        },
-        {
-          id:3,
           name:'组队',
           className:'teamup',
           imgUrl:'../../images/navbar/teamup_active.png',

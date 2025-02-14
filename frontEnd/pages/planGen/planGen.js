@@ -71,13 +71,11 @@ Page({
     this.setData({
       [questionType]: value,
     });
-    console.log(questionType + " " + value+this.data[questionType]);
+    // console.log(questionType + " " + value,this.data[questionType]);
   },
 
   submitSurvey() {
     //检查是否有未填写的问题
-    console.log(this.data)
-    
     const { personality, preference, hobbies, time, budget } = this.data;
     if (!personality || !preference || !hobbies || !time || !budget) {
       wx.showToast({
