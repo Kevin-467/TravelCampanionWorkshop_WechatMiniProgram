@@ -1,30 +1,18 @@
-const app = getApp()
-
+// pages/me/myPost/myPost.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    user:{
-      nickname:'',
-      avatar:'',
-      loginStatus:false,
-      navList:[
-        {id:1,text:'我加入的',imgUrl:'',gotoUrl:''},
-        {id:2,text:'我参与的',imgUrl:'',gotoUrl:''},
-        {id:3,text:'我发布的',imgUrl:'',gotoUrl:''},
-      ]
-    }
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      user:{
-        nickname:'kevin-467',
-        avatar:app.globalData.defaultAvatarUrl,
-        loginStatus:true
-      }
-    })
+
   },
 
   /**
