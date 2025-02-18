@@ -4,8 +4,7 @@
     "pages/me/me",
     "pages/chatspace/chatspace",
     "pages/teamup/teamup",
-     
-    "pages/login/login",
+    
     "pages/routeGen/routeGen",
     "pages/planGen/planGen",
 

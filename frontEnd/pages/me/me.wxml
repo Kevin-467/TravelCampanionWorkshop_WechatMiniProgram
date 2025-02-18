@@ -1,15 +1,9 @@
 <!-- 头像&昵称 -->
 <view class="user-info">
     <image class="user-img" src="{{user.avatar}}"></image>
-    <!-- 用户已登录 -->
-    <view class="login-box" wx:if="{{user.loginStatus}}">  
-         <view class="text">{{user.nickname}}</view>
-         <button class="btn" bindtap="editInfo">编辑个人信息</button>
-    </view>
-    <!-- 用户未登录 -->
-    <view class="login-box" wx:else>
-        <view class="text">请先登录!</view>
-        <button class="btn" bindtap="login">登 录</button>
+    <view class="login-box">   
+        <view class="text">{{user.nickname}}</view>
+        <button class="btn" bindtap="editInfo">编辑个人信息</button>
     </view>
 </view>
 
@@ -32,7 +26,7 @@
 
     <view class="other wrapper">
         <navigator class="item" url="/pages/me/personalInfo/personalInfo">
-            <view class="left">个人信息</view>
+            <view class="left">个人资料</view>
             <view class="right">>></view>
         </navigator>
         <navigator class="item" url="/pages/me/privacyPolicy/privacyPolicy">

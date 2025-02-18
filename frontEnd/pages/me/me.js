@@ -5,24 +5,20 @@ Page({
     user:{
       nickname:'',
       avatar:'',
-      loginStatus:false,
-      navList:[
-        {id:1,text:'我加入的',imgUrl:'',gotoUrl:''},
-        {id:2,text:'我参与的',imgUrl:'',gotoUrl:''},
-        {id:3,text:'我发布的',imgUrl:'',gotoUrl:''},
-      ]
     }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  editInfo() {
+    wx.navigateTo({
+      url:'/pages/me/personalInfo/personalInfo'
+    })
+  },
+
   onLoad(options) {
     this.setData({
       user:{
-        nickname:'kevin-467',
+        nickname:'微信用户',
         avatar:app.globalData.defaultAvatarUrl,
-        loginStatus:true
       }
     })
   },

@@ -1,1 +1,119 @@
-/* pages/me/personalInfo/personalInfo.wxss */
+page {
+    color:#333;
+    height:100%;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+.wrapper {
+    margin:0 auto;
+    width:90vw;
+}
+
+.header {
+    height:80rpx;
+    color:#656565;
+}
+
+.header text {
+    display: block;
+    padding: 20rpx;
+}
+
+.bd {
+    border:2rpx solid #999;
+    background-color: #fff;
+}
+
+.item {
+    display: flex;
+    height: 60rpx;
+    align-items: center;
+    padding: 20rpx 0;
+    border-bottom: 1px solid #999;
+}
+
+.item:last-child {
+    border-bottom: 0;
+}
+
+.left {
+    margin-left: 20rpx;
+    width:160rpx;
+    font-size: 30rpx;  
+}
+
+.right {
+    flex:1;
+}
+
+.avatar-box {
+    height: 130rpx;
+}
+
+.avatar-box .right {
+    flex:0.8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar-box .right .tip {
+    margin-left: 20rpx;
+    color:#999;
+}
+
+.avatar-box .avatar {
+    width:100rpx;
+    height:100rpx;
+    border:2rpx solid #999;
+    border-radius: 50%;
+}
+
+.avatar-box .avatar-img {
+    height:100%;
+    width:100%
+}
+
+.preference-box {
+    margin: 10rpx 0;
+    height:100rpx;
+}
+
+.preference-box .right {
+    height: 100%;
+}
+
+.preference-box textarea {
+    padding:10rpx;
+    width:95%;
+    height:90%;
+    border:1px solid #999;
+    border-radius: 10rpx;
+    overflow: scroll;
+}
+
+.footer {
+    margin:40rpx auto;
+    height: 110rpx;
+}
+
+.footer .save-btn {
+    margin: 10rpx auto;
+    width:80%;
+    height:90%;
+    font-size: 40rpx;
+    border-radius: 100rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+

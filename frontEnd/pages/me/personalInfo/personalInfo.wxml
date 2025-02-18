@@ -1,2 +1,58 @@
-<!--pages/me/personalInfo/personalInfo.wxml-->
-<text>pages/me/personalInfo/personalInfo.wxml</text>
+<view class="contanier">
+    <view class="header">
+        <text>用户信息</text>
+    </view>
+    <view class="bd">
+        <view class="avatar-box item">
+            <view class="left">头像：</view>
+            <view class="right">
+                <button class="avatar" open-type="chooseAvatar" bindchooseAvatar="onchooseAvatar">
+                    <image class="avatar-img" src="{{avatar}}" mode="aspectFill"></image>
+                </button>
+                <text class="tip">(请点击头像框选择头像)</text>
+            </view>
+        </view>
+        <view class="nickname-box item">
+            <view class="left">昵称：</view>
+            <view class="right">
+                <input type="nickname" class="nickname" model:value="{{nickname}}" placeholder="请输入昵称"></input>
+            </view>
+        </view>
+        <view class="item">
+            <view class="left">性别：</view>
+            <view class="right">
+                <picker class="genderPicker" value="{{index}}"  range="{{genderArr}}" bindchange="ongenderChange">
+                    <view class="gender" wx:if="{{gender}}">{{gender}}</view>
+                    <view class="gender" style="color:#6c6b6b" wx:else>请点击选择性别</view>
+                </picker>
+            </view>
+        </view>
+        <view class="item">
+            <view class="left">生日：</view>
+            <view class="right">
+                <picker class="birthdayPicker" mode="date" field="year" end="{{currentDate}}" bindchange="ondateChange">
+                    <view class="birthday" wx:if="{{birthday}}">{{birthday}}</view>
+                    <view class="birthday" style="color:#6c6b6b" wx:else>请点击选择生日</view>
+                </picker>
+            </view>
+        </view>
+        <view class="item">
+            <view class="left">地区：</view>
+            <view class="right">
+                <picker class="regionPicker" mode="region" level="region" bindchange="onregionChange">
+                    <view class="region" wx:if="{{region}}">{{regionText}}</view>
+                    <view class="region" style="color:#6c6b6b" wx:else>请点击选择地区</view>
+                </picker>
+            </view>
+        </view>
+        <view class="preference-box item">
+            <view class="left">旅游偏好：</view>
+            <view class="right">
+                <textarea name="preference" class="preference" model:value="{{preference}}" placeholder="请输入您的旅游偏好"></textarea>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <button class="save-btn" type="primary" bindtap="saveInfo">保 存</button>
+    </view>
+</view>
