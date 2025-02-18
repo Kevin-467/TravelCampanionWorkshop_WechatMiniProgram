@@ -2,5 +2,5 @@
 
 1.项目代码
 
-- frontEnd文件夹:前端代码<br>
-- backEnd文件夹:后端代码
+- frontEnd文件夹:项目前端代码
+- travel_campanion_system文件夹:项目后端代码
