@@ -15,7 +15,6 @@ page {
 .user-info .user-img {
     width: 140rpx;
     height: 140rpx;
-    overflow: hidden;
     border-radius: 50%;
     border: 2rpx solid #ababab;
 }

@@ -10,15 +10,15 @@
 <view class="box">
     <!-- 导航 -->
     <view class="nav-bar wrapper">
-        <navigator class="nav-item" url="/pages/me/myParticipate/myParticipate">
+        <navigator class="nav-item" url="/pages/me/myStatistic/myStatistic?column=0">
             <image class="nav-img" src="../../images/我加入的.png"></image>
             <view class="nav-text">我加入的</view>
         </navigator>
-        <navigator class="nav-item" url="/pages/me/myLaunch/myLaunch">
+        <navigator class="nav-item" url="/pages/me/myStatistic/myStatistic?column=1">
             <image class="nav-img" src="../../images/我发起的.png"></image>
             <view class="nav-text">我发起的</view>
         </navigator>
-        <navigator class="nav-item" url="/pages/me/myPost/myPost">
+        <navigator class="nav-item" url="/pages/me/myStatistic/myStatistic?column=2">
             <image class="nav-img" src="../../images/我发布的.png"></image>
             <view class="nav-text">我发布的</view>
         </navigator>

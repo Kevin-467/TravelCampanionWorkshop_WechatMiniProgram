@@ -6,10 +6,10 @@
         <view class="avatar-box item">
             <view class="left">头像：</view>
             <view class="right">
-                <button class="avatar" open-type="chooseAvatar" bindchooseAvatar="onchooseAvatar">
+                <button class="avatar" open-type="chooseAvatar" bindchooseavatar="onchooseAvatar">
                     <image class="avatar-img" src="{{avatar}}" mode="aspectFill"></image>
                 </button>
-                <text class="tip">(请点击头像框选择头像)</text>
+                <text class="tip">(请点击头选择头像)</text>
             </view>
         </view>
         <view class="nickname-box item">

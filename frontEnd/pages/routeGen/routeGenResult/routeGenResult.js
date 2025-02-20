@@ -1,4 +1,5 @@
-// pages/routeGen/routeGenResult/routeGenResult.js
+const app = getApp()
+
 Page({
   data: {
     tip:'',
@@ -13,50 +14,54 @@ Page({
 
   getRoute: function (){
     wx.showLoading({
-      title: '生成路线中...',
+      title: '生成路线中...'
     })
 
-    // GET/POST请求 将数据发送到后端，并从后端获取生成的旅游路线( 后端接口? )
-    /* wx.request({
-      url:'#', // url = ???
-      data: {
-        destination: this.data.destination,
-        travelDays:this.options.travelDays,
-        budget: this.data.budget,
-        preferences: this.data.preferences,
-      },
-      timeout:25000,
+    // POST请求 将数据发送到后端，并从后端获取生成的旅游路线( 后端接口? )
+   /*  const {token,destination,travelDays,budget,preferences} = this.data
+    wx.request({
+      url:'#', 
+      data: {token,destination,travelDays,budget,preferences},
+      method:'POST',
       success:(res)=>{
+        console.log(res)
         wx.hideLoading()
-        if(res.data&&res.route){
-          this.setData({
-            route:res.data.route,
-            tip:'已为您生成旅游路线！'
-          })
-        } else {
-          //未能生成旅游路线
-          wx.showModal({
-            title:'温馨提示',
-            content:'很抱歉，未能为您生成旅游路线！',
-            showCancel:false,
-            confirmText:'确认'
-          })
-        }
+        if(res.statusCode == 200){
+          const {route} = res.data.data
+          if(route){
+            this.setData({
+              route:res.data.route,
+              tip:'已为您生成旅游路线！'
+            })
+          } else {
+            //未能生成旅游路线
+            wx.showToast({
+              title:'很抱歉，未能为您生成旅游路线！',
+              icon:'none',
+            })}
+            this.setData({
+              tipShow:false,
+              emptyBoxShow:true
+            })
+          }
       },
       fail:(err)=>{
         wx.hideLoading()
         if (err.errMsg.includes('timeout')) {
           wx.showToast({
-            title: '请求超时,未能生成旅游路线！',
+            title: '出错了,未能生成旅游路线！',
             icon:'none',
-            duration:2500
+          })
+          this.setData({
+            tipShow:false,
+            emptyBoxShow:true
           })
         }
       }
     }) */
     setTimeout(()=>{
       wx.hideLoading()
-      /* this.setData({
+      this.setData({
         tip:'已为您生成以下旅游路线',
         route:[
           {id:1,sceneName:'遇龙河',describe:'遇龙河是一条较为宁静的河流，水流平缓，周围环绕着喀斯特山峰。您可以选择竹筏漂流或划船，享受水清山绿的宁静与美丽，远离游客的喧嚣，体验与大自然亲密接触的感觉。'},
@@ -68,23 +73,24 @@ Page({
         ],
         tipShow:true,
         emptyBoxShow:false
+      })
+
+      /* wx.showToast({
+        title: '路线生成失败！',
+        icon: 'error',
+        duration: 2000,
+      })
+
+      this.setData({
+        tipShow:false,
+        emptyBoxShow:true
       }) */
-
-        wx.showToast({
-          title: '路线生成失败！',
-          icon: 'error',
-          duration: 2000,
-        })
-
-        this.setData({
-          tipShow:false,
-          emptyBoxShow:true
-        })
     },5000)
   },
 
   onLoad(options) {
     this.setData({
+      token:app.globalData.token,
       destination: decodeURIComponent(options.destination||''),
       travelDays:decodeURIComponent(options.travelDays||''),
       budget: decodeURIComponent(options.budget||''),
