@@ -1,47 +1,51 @@
+import userUtils from "../../../utils/userUtils";
+
 // pages/teamup/teamup.js
 Page({
   data: {
     genderOptions: [
-      { id: 1, gender: "男", value: 0 },
-      { id: 2, gender: "女", value: 1 },
+      { id: 1, gender: "男"},
+      { id: 2, gender: "女"},
     ],
-    nickname: "",
     gender: "",
     travelDays:0,
     budget: 0,
     preference: "",
+    isDisabled:"",
   },
 
-  // 性别选择变化
-  handleChoice: function (e) {
-    const gender = e.detail.value;
-    this.setData({
-      gender: gender,
-    });
-  },
+  handleChoice: userUtils.onGenderChange,
 
   //多个滑块共用此函数，用所点击滑块的id来区别设置的数据项
-  onSliderChange(e) {
-    const typeId = e.target.id;
-    this.setData({
-      [typeId]: e.detail.value
-    })
-  },
+  onSliderChange:userUtils.onSliderChange,
 
   submitForm() {
-    const {nickname,gender,travelDays,budget,preference} = this.data
-    
-    if(!nickname||!gender||travelDays === 0||budget === 0||!preference){
-     wx.showToast({
-        title: '请您先填写完所有信息！',
-        icon:'none',
-        duration:2000
+    const {gender,travelDays,budget,preference} = this.data
+    if (!gender) {
+      wx.showToast({
+        title: '请选择您的性别！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!travelDays) {
+      wx.showToast({
+        title: '请填写您的旅游天数！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!preference) {
+      wx.showToast({
+        title: '请填写您的旅游偏好！',
+        icon: 'none'
       })
       return
     }
 
     const queryObj = {
-      nickname,
       gender,
       travelDays,
       budget,
@@ -55,19 +59,59 @@ Page({
 
   resetForm() {
     this.setData({
-      nickname: "",
       gender: "",
       travelDays:0,
       budget: 0,
-      preference: "",
+      preference: ""
     })
   },
 
   //生命周期函数--监听页面加载
   onLoad(options) {
+    //通过token获取用户昵称和性别 GET请求
+    /* const token = ''
+    wx.request({
+      url: "#",
+      data: {
+        token,
+      },
+      timeout: 5000,
+      success: (res) => {
+        console.log(res);
+        wx.hideNavigationBarLoading();
+        if (res.statuseCode == 200) {
+          const { gender } = res.data.data.userInfo;
+          this.setData({
+            gender
+          })
+        } else {
+          wx.hideNavigationBarLoading();
+          wx.showToast({
+            title:'获取用户信息失败！',
+            icon:'none'
+          })
+        }
+      },
+      fail: (err) => {
+        wx.hideNavigationBarLoading();
+        wx.showToast({
+          title:'获取用户信息失败！',
+          icon:'none'
+        })
+      },
+      complete:() => {
+        const gender = this.data.gender
+        this.setData({
+          isDisabled:gender ? true : false
+        })
+      }
+    }) */
+   const gender = ''
     this.setData({
+      gender,
       travelDays:0,
       budget: 0,
+      isDisabled:gender ? true : false
     });
   },
 

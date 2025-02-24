@@ -9,15 +9,16 @@
                 <button class="avatar" open-type="chooseAvatar" bindchooseavatar="onchooseAvatar">
                     <image class="avatar-img" src="{{avatar}}" mode="aspectFill"></image>
                 </button>
-                <text class="tip">(请点击头选择头像)</text>
+                <text class="tip">(请点击选择头像)</text>
             </view>
         </view>
         <view class="nickname-box item">
             <view class="left">昵称：</view>
             <view class="right">
-                <input type="nickname" class="nickname" model:value="{{nickname}}" placeholder="请输入昵称"></input>
+                <input type="nickname" class="nickname" model:value="{{nickname}}" placeholder="请输入昵称 (最多包含15个字符)" maxlength="15" bindinput="onnicknameChange"></input>
             </view>
         </view>
+        <view class="msg {{isNicknameValid?'correct':'error'}}" wx:if="{{nickname.length > 0}}">{{msg}}</view>
         <view class="item">
             <view class="left">性别：</view>
             <view class="right">
@@ -27,32 +28,20 @@
                 </picker>
             </view>
         </view>
-        <view class="item">
-            <view class="left">生日：</view>
+        <view class="hobby-box item">
+            <view class="left">兴趣爱好：</view>
             <view class="right">
-                <picker class="birthdayPicker" mode="date" field="year" end="{{currentDate}}" bindchange="ondateChange">
-                    <view class="birthday" wx:if="{{birthday}}">{{birthday}}</view>
-                    <view class="birthday" style="color:#6c6b6b" wx:else>请点击选择生日</view>
-                </picker>
-            </view>
-        </view>
-        <view class="item">
-            <view class="left">地区：</view>
-            <view class="right">
-                <picker class="regionPicker" mode="region" level="region" bindchange="onregionChange">
-                    <view class="region" wx:if="{{region}}">{{regionText}}</view>
-                    <view class="region" style="color:#6c6b6b" wx:else>请点击选择地区</view>
-                </picker>
-            </view>
-        </view>
-        <view class="preference-box item">
-            <view class="left">旅游偏好：</view>
-            <view class="right">
-                <textarea name="preference" class="preference" model:value="{{preference}}" placeholder="请输入您的旅游偏好"></textarea>
+                <textarea name="hobby" class="hobby" model:value="{{hobby}}" placeholder="请输入您的兴趣爱好 (最多100个字符)" maxlength="100"></textarea>
             </view>
         </view>
     </view>
     <view class="footer">
         <button class="save-btn" type="primary" bindtap="saveInfo">保 存</button>
+        <view class="tip-area">
+            <view class="title">温 馨 提 示</view>
+            <view class="bd">
+                <view class="content"><text style="color:#999">1</text>. 昵称不超过<text> 15 </text>个字符，且只能包含 <text>大小写字母、0-9、下划线和中文字符</text>。</view>
+            </view>
+        </view>
     </view>
 </view>

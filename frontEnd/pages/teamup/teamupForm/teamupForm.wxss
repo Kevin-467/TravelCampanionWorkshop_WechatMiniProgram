@@ -63,22 +63,6 @@ page {
     margin-left: 5px;
 }
 
-.date-picker {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.picker-item {
-    padding: 15px;
-    width: 80%;
-    font-size: 15px; 
-    text-align: center;
-    background-color: #e2e0e0;
-    border: 1px solid #b7b7b7;
-    border-radius: 8px;
-}
-
 .slider-value {
     margin-top: 10px;
     font-size: 14px;

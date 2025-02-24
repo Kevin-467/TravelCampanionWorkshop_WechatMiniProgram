@@ -14,10 +14,9 @@ APP_SECRET = "2747dff5884689877ecd3ebe4f923508"
 class LoginRequest(BaseModel):
     code:str
 
-@app.post('/login/')
+# 登录接口 POST请求
+@app.post('/auth/login/')
 def login(loginCode: LoginRequest):
-    # import pdb
-    # pdb.set_trace()
     url = f"https://api.weixin.qq.com/sns/jscode2session?appid={APP_ID}&secret={APP_SECRET}&js_code={loginCode.code}&grant_type=authorization_code"
     result = requests.get(url)
     data = result.json()

@@ -25,42 +25,52 @@
     </view>
       
     <view class="title" hidden="{{hideForm}}">没有找到心仪的伙伴?</view>
-    <view class="tip" hidden="{{hideForm}}">请确认组队内容，点击按钮发布组队</view>
+    <view class="tip" hidden="{{hideForm}}">请填写组队内容，点击按钮发布组队！</view>
     <view class="form" hidden="{{hideForm}}">
         <view class="form-item">
-            <text class="label">封面(选填)</text>
+            <text class="label">封面 (点击"+"号选择，若未选择封面则系统将自动设置默认封面)</text>
             <view class="picture" bindtap="onpicChoose" wx:if="{{showAddPicBox}}"></view>
             <image class="picture" src="{{picUrl}}"  bindtap="onpicChoose" style="border: 1px solid #999; background-image: none;" wx:else></image>
         </view>
         
         <view class="form-item">
             <text class="label">昵称</text>
-            <input class="input" placeholder="" model:value="{{ nickname }}" disabled/>
+            <input class="input" placeholder="请输入您的昵称，最多15个字符"
+            maxlength="15" model:value="{{nickname}}" bindinput="onnicknameChange"/>
+            <view class="msg {{isNicknameValid ? 'correct' : 'error'}}" wx:if="{{nickname}}">{{msg}}</view>
         </view>
     
         <view class="form-item">
             <text class="label">性别</text>
             <radio-group bindchange="handleChoice" class="radio-group">
                 <label wx:for="{{ genderOptions }}" wx:key="id" class="radio-item">
-                    <radio value="{{ item.gender }}" class="radio" checked="{{ gender === item.gender }}" disabled>
+                    <radio value="{{ item.gender }}" class="radio" checked="{{ gender === item.gender }}" bindchange="handleChoice">
                         <text>{{item.gender}}</text></radio>
                 </label>
             </radio-group>
         </view>
 
         <view class="form-item">
-            <text class="label">计划旅游天数 (单位:天)</text>
-            <input class="input" placeholder="" model:value="{{ travelDays }}" disabled/>
+            <text class="label">计划旅行天数(必填)</text>
+        <view class="slider-container">
+            <slider min="0" max="30" step="1" show-value model:value="{{ travelDays }}" bindchange="onSliderChange" id="travelDays">
+            </slider>
+            <text class="slider-value" wx:if="{{travelDays > 0}}">您计划的旅行天数：<text style="color:#4caf50">{{ travelDays }}</text> 天</text>
+        </view>
         </view>
 
         <view class="form-item">
-            <text class="label">预算(元)</text>
-            <input class="input" placeholder="" model:value="{{ budget }}" disabled/>
+            <text class="label">您的预算(单位：元，默认值：0)</text>
+        <view class="slider-container">
+            <slider min="0" max="10000" step="100" show-value model:value="{{ budget }}" bindchange="onSliderChange" id="budget">
+            </slider>
+            <text class="slider-value">当前选择的预算：<text style="color:#4caf50">{{ budget }}</text> {{budget>0?'元':''}}</text>
+        </view>
         </view>
     
         <view class="form-item">
             <text class="label">旅游偏好</text>
-            <textarea class="textarea" placeholder="" model:value="{{ preference }}" disabled></textarea>
+            <textarea class="textarea" placeholder="" model:value="{{ preference }}"></textarea>
         </view>
     
         <button class="btn-submit" type="primary" bindtap="createTeamup">发布组队</button>

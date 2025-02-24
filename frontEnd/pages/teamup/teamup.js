@@ -1,3 +1,5 @@
+import userUtils from "../../utils/userUtils";
+
 const app = getApp();
 
 Page({
@@ -16,6 +18,8 @@ Page({
     emptyResultText: "",
     showAddPicBox: true,
     hideForm: "",
+    msg: "",
+    isNicknameValid: "",
   },
 
   findPartner: function () {
@@ -27,7 +31,6 @@ Page({
       url: "#",
       data: {
         token,
-        nickname: this.data.nickname,
         gender: this.data.gender,
         startDate: this.data.startDate,
         endDate: this.data.endDate,
@@ -91,8 +94,8 @@ Page({
           },
         ],
         hideForm: false,
-      })
-    }, 5000)
+      });
+    }, 5000);
   },
 
   //防抖/节流优化？
@@ -161,8 +164,48 @@ Page({
 
   //如未选择照片，则上传默认图片
   createTeamup() {
-    const { picUrl, initator, travelDays, budget, preference, token } =
-      this.data;
+    const { picUrl, nickname, gender, travelDays, budget, preference, token } = this.data;
+
+    if (!nickname) {
+      wx.showToast({
+        title: '请填写您的昵称！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!userUtils.checkNickname(nickname)) {
+      wx.showToast({
+        title: '昵称不符合要求！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!gender) {
+      wx.showToast({
+        title: '请选择您的性别！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!travelDays) {
+      wx.showToast({
+        title: '请填写您的旅游天数！',
+        icon: 'none'
+      })
+      return
+    }
+
+    if (!preference) {
+      wx.showToast({
+        title: '请填写您的旅游偏好！',
+        icon: 'none'
+      })
+      return
+    }
+
     wx.showLoading({
       title: "正在发布中",
     });
@@ -240,7 +283,6 @@ Page({
           filePath:tempFilePath,
           name:'teamup-image-file',
           formData:{token},
-          timeout:5000,
           success:(res)=>{
             if(res.statusCode == 200){
               const {imgUrl} = res.data.data
@@ -275,15 +317,55 @@ Page({
     });
   },
 
+  onnicknameChange: userUtils.onnicknameChange,
+
+  onSliderChange: userUtils.onSliderChange,
+
   onLoad(options) {
+    //通过token获取用户昵称 GET请求
+    /* const token = ''
+    wx.request({
+      url: "#",
+      data: {
+        token,
+      },
+      success: (res) => {
+        console.log(res);
+        wx.hideNavigationBarLoading();
+  
+        if (res.statuseCode == 200) {
+          const { nickname } = res.data.data.userInfo;
+          this.setData({
+            nickname,
+            gender
+          })
+        } else {
+          wx.hideNavigationBarLoading();
+          wx.showToast({
+            title:'获取昵称失败！',
+            icon:'none'
+          })
+        }
+      },
+      fail: (err) => {
+        wx.hideNavigationBarLoading();
+        wx.showToast({
+          title:'获取昵称失败！',
+          icon:'none'
+        })
+      },
+    }) */
     Object.keys(options).forEach((key) =>
       this.setData({
         [key]: decodeURIComponent(options[key]),
       })
     );
+    const nickname = "wxyh";
     this.setData({
+      msg: "",
+      nickname,
       token: app.globalData.token,
-      avatar: defaultAvatarUrl,
+      avatar: app.globalData.defaultAvatarUrl,
       hideForm: true,
       emptyResultText: "正在匹配中...",
     });

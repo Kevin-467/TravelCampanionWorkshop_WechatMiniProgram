@@ -48,10 +48,10 @@ page {
 }
 
 .contanier .card .left .avatar {
-    width: 40px; 
-    height: 40px;
+    width:80rpx; 
+    height: 80rpx;
     border:1px solid #999;
-    border-radius: 10px;
+    border-radius: 40rpx;
     object-fit: cover;
 }
 
@@ -60,33 +60,34 @@ page {
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    padding-left: 10px; 
+    padding-left: 20rpx; 
 }
 
 .contanier .card .info {
     display: flex;
-    width:140px;
+    width:400rpx;
     overflow: hidden;
     flex-direction: column;
     justify-content: center;
-    margin-right: 20px;
+    margin-right: 40rpx;
 }
 
 .contanier .card .info .name {
-    font-size: 16px;
+    font-size: 28rpx;
     font-weight: bold;
     color: #333;
 }
 
 .contanier .card .info .detail {
-    font-size: 12px;
+    margin-top: 5rpx;
+    font-size: 22rpx;
     color: #777;
 }
 
 .contanier .card .right .confirm-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 20px;
+    padding: 10rpx 20rpx;
+    font-size: 24rpx;
+    border-radius: 40rpx;
     border: none;
     background-color: #34b7f1;
     color: #ffffff;
@@ -142,6 +143,10 @@ page {
     transition: border-color 0.3s;
 }
 
+.msg {
+    margin: 20rpx 0;
+}
+
 .input:focus,
 .textarea:focus {
     border-color: #4CAF50;
@@ -167,20 +172,10 @@ page {
     margin-left: 5px;
 }
 
-.date-box {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.date-item {
-    padding: 15px;
-    width: 25%;
-    font-size: 15px; 
-    text-align: center;
-    background-color: #e2e0e0;
-    border: 1px solid #b7b7b7;
-    border-radius: 8px;
+.slider-value {
+    margin-top: 10px;
+    font-size: 14px;
+    color:#999;
 }
 
 button {

@@ -20,7 +20,7 @@ page {
     padding: 20rpx;
 }
 
-.bd {
+.contanier > .bd {
     border:2rpx solid #999;
     background-color: #fff;
 }
@@ -81,16 +81,26 @@ page {
     left:0;
 }
 
-.preference-box {
+.msg {
+    padding:10rpx 0;
+    padding-left:10rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    border-bottom: 1px solid #999;
+}
+
+.hobby-box {
     margin: 10rpx 0;
     height:100rpx;
 }
 
-.preference-box .right {
+.hobby-box .right {
     height: 100%;
 }
 
-.preference-box textarea {
+.hobby-box textarea {
     padding:10rpx;
     width:95%;
     height:90%;
@@ -100,8 +110,7 @@ page {
 }
 
 .footer {
-    margin:40rpx auto;
-    height: 110rpx;
+    margin:40rpx auto 0;
 }
 
 .footer .save-btn {
@@ -110,6 +119,28 @@ page {
     height:90%;
     font-size: 40rpx;
     border-radius: 100rpx;
+}
+
+.footer .tip-area {
+    margin:40rpx 20rpx 0;
+    color:#858585;
+}
+
+.tip-area .title {
+    font-weight: bold;
+}
+
+.tip-area .bd {
+    margin: 10rpx;
+}
+
+.tip-area .content {
+    margin:10rpx 0;
+}
+
+.tip-area text {
+    color:#4caf50;
+    font-weight: bold;
 }
 
 
