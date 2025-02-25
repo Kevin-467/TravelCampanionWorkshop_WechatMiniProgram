@@ -5,15 +5,15 @@ Page({
       swiperList:[
         {
           id:0,
-          url:"../../images/slider/slider-1.jpg"
+          url:"https://img-storage-1336210390.cos.ap-guangzhou.myqcloud.com/slider-1.jpg"
         },
         {
           id:1,
-          url:"../../images/slider/slider-2.jpg"
+          url:"https://img-storage-1336210390.cos.ap-guangzhou.myqcloud.com/slider-2.jpg"
         },
         {
           id:2,
-          url:"../../images/slider/slider-3.jpg"
+          url:"https://img-storage-1336210390.cos.ap-guangzhou.myqcloud.com/slider-3.jpg"
         },
       ],
       commonFunc:[
@@ -33,18 +33,10 @@ Page({
         },
         {
           id:2,
-          name:'更多游记',
-          className:'route-gen',
-          imgUrl:'../../images/homePage/游记.png',
-          navUrl:'/pages/share/share',
-          openType:'switchTab'
-        },
-        {
-          id:3,
           name:'组队',
           className:'teamup',
           imgUrl:'../../images/navbar/teamup_active.png',
-          navUrl:'/pages/teamup/teamup',
+          navUrl:'/pages/teamup/teamupForm/teamupForm',
           openType:'switchTab'
         }
       ],

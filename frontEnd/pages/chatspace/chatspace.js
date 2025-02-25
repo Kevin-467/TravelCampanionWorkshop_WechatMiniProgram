@@ -1,11 +1,15 @@
 // pages/chatspace/chatspace.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    tabList:['讨论旅游行程','帖子广场','发布帖子'],
+    tabIndex:0
+  },
 
+  onTabClick(e) {
+    const index = +e.currentTarget.id
+    this.setData({
+      tabIndex:index
+    })
   },
 
   /**

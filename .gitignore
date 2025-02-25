@@ -31,6 +31,7 @@ mock/
 report/
 node_modules/
 
+
 # Vue相关忽略
 .vscode/
 .vuepress/dist/
@@ -93,6 +94,7 @@ build/
 .idea/
 .idea_modules/
 # IntelliJ IDEA
+.idea/
 *.iws
 *.ipr
 # Eclipse

@@ -3,11 +3,16 @@
     "pages/home/home",
     "pages/me/me",
     "pages/chatspace/chatspace",
-    "pages/share/share",
     "pages/teamup/teamup",
-    "pages/searchResult/searchResult",
     "pages/routeGen/routeGen",
-    "pages/planGen/planGen"
+    "pages/planGen/planGen",
+    "pages/routeGen/routeGenResult/routeGenResult",
+    "pages/planGen/planGenResult/planGenResult",
+    "pages/teamup/teamupForm/teamupForm",
+    "pages/me/personalInfo/personalInfo",
+    "pages/me/privacyPolicy/privacyPolicy",
+    "pages/me/aboutUs/aboutUs",
+    "pages/me/myStatistic/myStatistic"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,13 +32,7 @@
         "selectedIconPath": "/images/navbar/home_active.png"
       },
       {
-        "pagePath": "pages/share/share",
-        "text": "游记",
-        "iconPath": "/images/navbar/share.png",
-        "selectedIconPath": "/images/navbar/share_active.png"
-      },
-      {
-        "pagePath": "pages/teamup/teamup",
+        "pagePath": "pages/teamup/teamupForm/teamupForm",
         "text": "组队",
         "iconPath": "/images/navbar/teamup.png",
         "selectedIconPath": "/images/navbar/teamup_active.png"

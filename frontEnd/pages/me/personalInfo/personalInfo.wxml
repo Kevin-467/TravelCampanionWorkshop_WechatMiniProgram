@@ -1,0 +1,47 @@
+<view class="contanier">
+    <view class="header">
+        <text>用户信息</text>
+    </view>
+    <view class="bd">
+        <view class="avatar-box item">
+            <view class="left">头像：</view>
+            <view class="right">
+                <button class="avatar" open-type="chooseAvatar" bindchooseavatar="onchooseAvatar">
+                    <image class="avatar-img" src="{{avatar}}" mode="aspectFill"></image>
+                </button>
+                <text class="tip">(请点击选择头像)</text>
+            </view>
+        </view>
+        <view class="nickname-box item">
+            <view class="left">昵称：</view>
+            <view class="right">
+                <input type="nickname" class="nickname" model:value="{{nickname}}" placeholder="请输入昵称 (最多包含15个字符)" maxlength="15" bindinput="onnicknameChange"></input>
+            </view>
+        </view>
+        <view class="msg {{isNicknameValid?'correct':'error'}}" wx:if="{{nickname.length > 0}}">{{msg}}</view>
+        <view class="item">
+            <view class="left">性别：</view>
+            <view class="right">
+                <picker class="genderPicker" value="{{index}}"  range="{{genderArr}}" bindchange="ongenderChange">
+                    <view class="gender" wx:if="{{gender}}">{{gender}}</view>
+                    <view class="gender" style="color:#6c6b6b" wx:else>请点击选择性别</view>
+                </picker>
+            </view>
+        </view>
+        <view class="hobby-box item">
+            <view class="left">兴趣爱好：</view>
+            <view class="right">
+                <textarea name="hobby" class="hobby" model:value="{{hobby}}" placeholder="请输入您的兴趣爱好 (最多100个字符)" maxlength="100"></textarea>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <button class="save-btn" type="primary" bindtap="saveInfo">保 存</button>
+        <view class="tip-area">
+            <view class="title">温 馨 提 示</view>
+            <view class="bd">
+                <view class="content"><text style="color:#999">1</text>. 昵称不超过<text> 15 </text>个字符，且只能包含 <text>大小写字母、0-9、下划线和中文字符</text>。</view>
+            </view>
+        </view>
+    </view>
+</view>

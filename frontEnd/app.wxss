@@ -1,1 +1,7 @@
+.correct {
+    color: #4caf50;
+}
 
+.error {
+    color:#ff3d3d
+}

@@ -1,0 +1,21 @@
+<view class="tab-bar">
+    <block wx:for="{{tabList}}" wx:key="item">
+        <view id="{{index}}" class="nav-item {{tabIndex === index ?'active':''}}" bindtap="onTabClick">
+            <view class="nav-title">{{item}}</view>
+        </view>
+    </block>
+</view>
+
+<view class="contanier">
+    <block wx:if="{{tabIndex === 0}}">
+        ~ 空空如也 赶紧与小伙伴们组队吧~
+    </block>
+
+    <block wx:if="{{tabIndex === 1}}">
+        ~ 空空如也 先去发起一次组队吧~
+    </block>
+
+    <block wx:if="{{tabIndex === 2}}">
+        ~ 空空如也 你还没有发布任何帖子~
+    </block>
+</view>

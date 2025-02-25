@@ -1,1 +1,116 @@
-/* pages/me/me.wxss */
+page {
+    background:linear-gradient(to bottom,#dafbda,#ffffff);
+    color:#333;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:50rpx;
+
+}
+
+.user-info .user-img {
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    border: 2rpx solid #ababab;
+}
+
+.user-info .login-box {
+    margin: 20rpx 0;
+    height: 200rpx;
+    font-size: 40rpx;
+    text-align: center;
+}
+
+.user-info .text {
+    margin: 20rpx 0;
+    font-weight: bold;
+}
+
+.user-info .btn {
+    margin: 30rpx 0;
+    width: 50vw;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 40rpx;
+    color:#fff;
+    background-color: #4caf50;
+    border-radius: 50rpx; 
+}
+
+.box {
+    margin: 30rpx 0;
+}
+
+.wrapper {
+    width:95vw;
+    margin: 40rpx auto;
+    background-color: #f8f7f7;
+    border:1px solid #999;
+    border-radius:20rpx;
+}
+
+.nav-bar {
+    display: flex;
+    height: 180rpx;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-bar .nav-item {
+    display: flex;
+    width: 140rpx;
+    height: 140rpx;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar .nav-img {
+    padding: 10rpx 15rpx;
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.nav-bar .nav-text {
+    margin: 5rpx 0;
+}
+
+.other .item {
+    display: flex;
+    margin: 0 20rpx;
+    padding: 20rpx;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 40rpx;
+    border:1px solid #999;
+    border-left: 0;
+    border-right: 0;
+}
+
+.other .item:first-child {
+    margin-top: 10rpx;
+    border-top: 0;
+}
+
+.other .item:last-child {
+    margin-bottom: 10rpx;
+    border-bottom: 0;
+}
+
+.other .right {
+    color:#4caf50;
+}
+
+
+
+
+
+
+
+
+

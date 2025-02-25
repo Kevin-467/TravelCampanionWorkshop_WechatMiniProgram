@@ -1,6 +1,0 @@
-<!--components/search/search.wxml-->
-<view class="searchBox">
-  <navigator class="search_nav" url="{{urlPath}}">
-    <icon type="search" size="22px"></icon><span> 搜 索 </span>
-  </navigator>
-</view>                                             
