@@ -8,16 +8,13 @@ import os
 
 app = FastAPI()
 
-APP_ID = "wxa35b788e7a7760be"
-APP_SECRET = "2747dff5884689877ecd3ebe4f923508"
-
 class LoginRequest(BaseModel):
     code:str
 
 # 登录接口 POST请求
 @app.post('/auth/login/')
 def login(loginCode: LoginRequest):
-    url = f"https://api.weixin.qq.com/sns/jscode2session?appid={APP_ID}&secret={APP_SECRET}&js_code={loginCode.code}&grant_type=authorization_code"
+    url = f"https://api.weixin.qq.com/sns/jscode2session?appid=wxa35b788e7a7760be&secret=2747dff5884689877ecd3ebe4f923508&js_code={loginCode.code}&grant_type=authorization_code"
     result = requests.get(url)
     data = result.json()
     openid = data["openid"]
