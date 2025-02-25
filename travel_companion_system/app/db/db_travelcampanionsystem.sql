@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 25/02/2025 01:24:12
+ Date: 26/02/2025 02:09:36
 */
 
 SET NAMES utf8mb4;
@@ -55,7 +55,7 @@ CREATE TABLE `login`  (
   INDEX `user_id_2`(`user_id` ASC) USING BTREE,
   INDEX `token_2`(`token` ASC) USING BTREE,
   CONSTRAINT `login_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户登录信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户登录信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of login
@@ -108,6 +108,66 @@ CREATE TABLE `notice_attachments`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for route
+-- ----------------------------
+DROP TABLE IF EXISTS `route`;
+CREATE TABLE `route`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '路线id',
+  `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
+  `destination` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '旅游目的地',
+  `travel_days` int UNSIGNED NULL DEFAULT NULL COMMENT '计划旅游天数',
+  `budget` int UNSIGNED NULL DEFAULT NULL COMMENT '预算',
+  `preference` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '旅游偏好',
+  `route_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '路线描述',
+  `route_spots` json NULL COMMENT '景点id数组',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '路线生成时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `destination`(`destination` ASC, `travel_days` ASC, `budget` ASC, `preference` ASC) USING BTREE,
+  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  CONSTRAINT `route_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `route_chk_1` CHECK (`travel_days` > 0)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '生成旅游路线表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of route
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for route_spots_mapping
+-- ----------------------------
+DROP TABLE IF EXISTS `route_spots_mapping`;
+CREATE TABLE `route_spots_mapping`  (
+  `route_id` int UNSIGNED NOT NULL,
+  `spot_id` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`route_id`, `spot_id`) USING BTREE,
+  INDEX `spot_id`(`spot_id` ASC) USING BTREE,
+  CONSTRAINT `route_spots_mapping_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `route` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `route_spots_mapping_ibfk_2` FOREIGN KEY (`spot_id`) REFERENCES `spots` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '旅游路线景点关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of route_spots_mapping
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for spots
+-- ----------------------------
+DROP TABLE IF EXISTS `spots`;
+CREATE TABLE `spots`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '景点id',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '景点名称',
+  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '景点地址',
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '景点描述',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `location`(`location` ASC) USING BTREE,
+  FULLTEXT INDEX `description`(`description`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '景点表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spots
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for teamup
 -- ----------------------------
 DROP TABLE IF EXISTS `teamup`;
@@ -116,8 +176,8 @@ CREATE TABLE `teamup`  (
   `initator_id` int UNSIGNED NULL DEFAULT NULL COMMENT '发起者ID 仅限于用户',
   `nickname` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发起者昵称 可不与用户本身的昵称相同',
   `gender` enum('男','女') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发起者性别',
-  `travel_days` int NULL DEFAULT NULL COMMENT '计划旅游天数',
-  `budget` int NULL DEFAULT NULL COMMENT '预算',
+  `travel_days` int UNSIGNED NULL DEFAULT NULL COMMENT '计划旅游天数',
+  `budget` int UNSIGNED NULL DEFAULT NULL COMMENT '预算',
   `preference` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '旅游偏好',
   `picUrl` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '组队封面',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '组队发起时间',
@@ -150,11 +210,33 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `id`(`id` ASC) USING BTREE,
   INDEX `gender`(`gender` ASC) USING BTREE,
   FULLTEXT INDEX `hobby`(`hobby`)
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户个人信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户个人信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+
+-- ----------------------------
+-- Procedure structure for process_route_spots
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `process_route_spots`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `process_route_spots`(route_id INT UNSIGNED, route_spots JSON)
+BEGIN 
+  DECLARE spot_id INT;
+  DECLARE `index` INT DEFAULT 0;
+  DECLARE spot_count INT;
+
+  SET spot_count = JSON_LENGTH(route_spots);
+  
+  WHILE `index` < spot_count DO
+    SET spot_id = JSON_UNQUOTE(JSON_EXTRACT(route_spots, CONCAT('$[', `index`, ']')));
+    INSERT INTO route_spots_mapping (route_id, spot_id) VALUES (route_id, spot_id);
+    SET `index` = `index` + 1;
+  END WHILE;
+END
+;;
+delimiter ;
 
 -- ----------------------------
 -- Event structure for check_expired_notices
@@ -171,6 +253,31 @@ DO UPDATE notice
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table route
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_route_insert`;
+delimiter ;;
+CREATE TRIGGER `after_route_insert` AFTER INSERT ON `route` FOR EACH ROW BEGIN
+  CALL process_route_spots(NEW.id,NEW.route_spots);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table route
+-- ----------------------------
+DROP TRIGGER IF EXISTS `after_route_spots_update`;
+delimiter ;;
+CREATE TRIGGER `after_route_spots_update` AFTER UPDATE ON `route` FOR EACH ROW BEGIN
+  IF NEW.route_spots != OLD.route_spots THEN
+    DELETE FROM route_spots_mapping WHERE route_id = NEW.id;
+    CALL process_route_spots(NEW.id, NEW.route_spots);
+  END IF;  
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table teamup
 -- ----------------------------
 DROP TRIGGER IF EXISTS `before_update_participantID`;
@@ -178,10 +285,10 @@ delimiter ;;
 CREATE TRIGGER `before_update_participantID` BEFORE UPDATE ON `teamup` FOR EACH ROW BEGIN
   -- 检查更新的 participant_id 是否与 initator_id 相同
   IF NEW.participant_id = OLD.initator_id THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '搭子与发起者不能是同一个人！';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '搭子与发起者不能是同一个人';
   END IF;
   IF OLD.participant_id = NEW.initator_id THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '搭子与发起者不能是同一个人！';
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '搭子与发起者不能是同一个人';
   END IF;
 END
 ;;
