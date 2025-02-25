@@ -1,0 +1,105 @@
+# 通用忽略规则
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.development
+.env.production
+
+# 前端通用忽略
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cache/
+.parcel-cache/
+
+# 微信小程序特定忽略
+project.config.json
+miniprogram_npm/
+demo/
+example/
+__test__/
+mock/
+report/
+node_modules/
+
+# Vue相关忽略
+.vscode/
+.vuepress/dist/
+.eslintcache
+*.js.map
+*.css.map
+
+# React相关忽略
+.eslintcache
+.report/
+.scripts/
+coverage/
+
+# Python后端忽略
+__pycache__/
+*.py[cod]
+.python-version
+venv/
+env/
+ENV/
+env.bak/
+env3/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+.installed.cfg
+*.egg
+dist/
+build/
+*.mo
+*.pot
+
+# Java后端忽略
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+.idea/
+out/
+gen/
+bin/
+.gradle/
+build/
+.metadata/
+
+# 开发环境配置忽略
+# Visual Studio
+.vs/
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+# PyCharm
+.idea/
+.idea_modules/
+# IntelliJ IDEA
+*.iws
+*.ipr
+# Eclipse
+.settings/
+.project
+.classpath
+.checkstyle
+.factorypath
+.springBean
+
