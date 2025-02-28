@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 26/02/2025 02:09:36
+ Date: 01/03/2025 00:14:29
 */
 
 SET NAMES utf8mb4;
@@ -28,10 +28,30 @@ CREATE TABLE `admin`  (
   `gender` enum('男','女') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '性别',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '后台管理员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '后台管理员表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for arrange
+-- ----------------------------
+DROP TABLE IF EXISTS `arrange`;
+CREATE TABLE `arrange`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '行程id',
+  `plan_id` int UNSIGNED NULL DEFAULT NULL COMMENT '方案id',
+  `day` int UNSIGNED NULL DEFAULT NULL COMMENT '第几天',
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '行程概述',
+  `detail` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '详细行程',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `plan_id`(`plan_id` ASC) USING BTREE,
+  CONSTRAINT `arrange_ibfk_1` FOREIGN KEY (`plan_id`) REFERENCES `plan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `arrange_chk_1` CHECK (`day` > 0)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '行程安排表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of arrange
 -- ----------------------------
 
 -- ----------------------------
@@ -55,7 +75,7 @@ CREATE TABLE `login`  (
   INDEX `user_id_2`(`user_id` ASC) USING BTREE,
   INDEX `token_2`(`token` ASC) USING BTREE,
   CONSTRAINT `login_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户登录信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户登录信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of login
@@ -108,19 +128,72 @@ CREATE TABLE `notice_attachments`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for plan
+-- ----------------------------
+DROP TABLE IF EXISTS `plan`;
+CREATE TABLE `plan`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '旅游方案id',
+  `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
+  `personality` enum('探索未知、寻找独特的旅行体验','选择热门景点、享受热闹氛围','依赖朋友/家人的建议、避免过多选择') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户性格',
+  `hobbies` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '用户兴趣爱好',
+  `time` enum('短途旅行（1-3天）','中长途旅行（4-7天）','长途旅行（超过7天）') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '计划旅游天数',
+  `budget` enum('0-1000元','1000-3000元','3000-5000元','5000-10000元','10000元以上') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '预算范围',
+  `preference` enum('登山徒步','越野冒险','探索历史遗迹','参观名胜古迹','体验当地习俗文化','品尝美食') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '旅游偏好',
+  `total_spending` int UNSIGNED NULL DEFAULT NULL COMMENT '方案预计花费',
+  `arrange` json NULL COMMENT '行程安排，具体见arrange表',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '方案生成时间',
+  `status` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '可用状态，0：可用，1：被占用/不可用',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  INDEX `personality`(`personality` ASC, `hobbies` ASC, `time` ASC, `budget` ASC, `preference` ASC) USING BTREE,
+  INDEX `total_spending`(`total_spending` ASC) USING BTREE,
+  CONSTRAINT `plan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '个性化旅游方案表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of plan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for posts
+-- ----------------------------
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE `posts`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '帖子id',
+  `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `img_Url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '封面图Url',
+  `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` enum('草稿','已发布','已删除') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '已发布',
+  `views` int UNSIGNED NULL DEFAULT 0,
+  `likes` int UNSIGNED NULL DEFAULT 0,
+  `comments_count` int UNSIGNED NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of posts
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for route
 -- ----------------------------
 DROP TABLE IF EXISTS `route`;
 CREATE TABLE `route`  (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '路线id',
   `user_id` int UNSIGNED NULL DEFAULT NULL COMMENT '用户id',
-  `destination` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '旅游目的地',
-  `travel_days` int UNSIGNED NULL DEFAULT NULL COMMENT '计划旅游天数',
-  `budget` int UNSIGNED NULL DEFAULT NULL COMMENT '预算',
-  `preference` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '旅游偏好',
-  `route_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '路线描述',
-  `route_spots` json NULL COMMENT '景点id数组',
-  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '路线生成时间',
+  `destination` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '旅游目的地',
+  `travel_days` int UNSIGNED NOT NULL COMMENT '计划旅游天数',
+  `budget` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '预算',
+  `preference` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '旅游偏好',
+  `route_description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '暂无描述' COMMENT '路线描述',
+  `route_spots` json NOT NULL COMMENT '景点id数组',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '路线生成时间',
+  `status` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '可用状态，0：可用，1：被占用/不可用',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `destination`(`destination` ASC, `travel_days` ASC, `budget` ASC, `preference` ASC) USING BTREE,
   INDEX `user_id`(`user_id` ASC) USING BTREE,
@@ -190,7 +263,7 @@ CREATE TABLE `teamup`  (
   FULLTEXT INDEX `preference`(`preference`),
   CONSTRAINT `teamup_ibfk_1` FOREIGN KEY (`initator_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `teamup_ibfk_2` FOREIGN KEY (`participant_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '组队表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '组队表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teamup
@@ -210,30 +283,142 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `id`(`id` ASC) USING BTREE,
   INDEX `gender`(`gender` ASC) USING BTREE,
   FULLTEXT INDEX `hobby`(`hobby`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户个人信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户个人信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 
 -- ----------------------------
+-- Procedure structure for process_arrange
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `process_arrange`;
+delimiter ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `process_arrange`(
+  IN plan_id INT UNSIGNED, 
+  IN arrange JSON,
+  OUT exec_status INT
+)
+BEGIN 
+
+DECLARE `day` INT UNSIGNED;
+DECLARE title VARCHAR(50);
+DECLARE detail TEXT;
+DECLARE arrange_length INT UNSIGNED;
+DECLARE `index` INT DEFAULT 0;
+DECLARE existing_arranges JSON;
+
+DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+BEGIN 
+  ROLLBACK;
+  SET exec_status = 2;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'SQL语句有误，执行失败！';
+END;
+
+SET exec_status = 0;
+SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION;
+
+UPDATE plan SET status = '1' WHERE id = plan_id AND `status` = '0';
+IF ROW_COUNT() = 0 THEN
+  SET exec_status = 1;
+  ROLLBACK;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '当前操作的方案被占用！';
+END IF;
+
+SELECT 1 FROM plan WHERE id = plan_id FOR UPDATE;
+SELECT 1 FROM arrange WHERE plan_id = plan_id FOR UPDATE;
+
+SET arrange_length = JSON_LENGTH(arrange);
+
+SELECT JSON_ARRAYAGG(JSON_OBJECT('id', id, 'day', day, 'title', title, 'detail', detail))
+INTO existing_arranges
+FROM arrange WHERE plan_id = plan_id;
+
+WHILE `index` < arrange_length DO
+  SET title = JSON_UNQUOTE(JSON_EXTRACT(arrange, CONCAT('$[', `index`, '].title')));
+  SET detail = JSON_UNQUOTE(JSON_EXTRACT(arrange, CONCAT('$[', `index`, '].detail')));
+  SET `day` = `index` + 1;
+  
+  IF NOT JSON_CONTAINS(existing_arranges, JSON_OBJECT('day', `day`)) THEN
+    INSERT INTO arrange (plan_id, day, title, detail) VALUES (plan_id, `day`, title, detail);
+  ELSE
+    UPDATE arrange 
+    SET title = title, detail = detail 
+    WHERE plan_id = plan_id AND day = `day`;
+  END IF;
+  
+  SET `index` = `index` + 1;
+END WHILE;
+
+DELETE FROM arrange WHERE plan_id = plan_id AND day NOT IN (SELECT day FROM arrange WHERE plan_id = plan_id);
+
+COMMIT;
+
+UPDATE plan SET status = '0' WHERE id = plan_id;
+SET exec_status = 0;
+
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Procedure structure for process_route_spots
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `process_route_spots`;
 delimiter ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `process_route_spots`(route_id INT UNSIGNED, route_spots JSON)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `process_route_spots`( 
+IN route_id INT UNSIGNED, 
+IN route_spots JSON,
+OUT exec_status INT
+)
 BEGIN 
-  DECLARE spot_id INT;
-  DECLARE `index` INT DEFAULT 0;
-  DECLARE spot_count INT;
 
-  SET spot_count = JSON_LENGTH(route_spots);
+DECLARE spot_id INT;
+DECLARE `index` INT DEFAULT 0;
+DECLARE spot_count INT;
+DECLARE exist_spot_ids JSON;
+
+DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+BEGIN 
+  ROLLBACK;
+  SET exec_status = 2;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'SQL语句有误，执行失败！';
+END;
+
+SET exec_status = 0;
+
+SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION;
+
+UPDATE route SET status = '1' WHERE id = route_id AND `status` = '0';
+IF ROW_COUNT() = 0 THEN
+  SET exec_status = 1;
+  ROLLBACK;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '当前操作的路线被占用！';
+END IF;
+
+SELECT 1 FROM route WHERE id = route_id FOR UPDATE;
+SELECT 1 FROM route_spots_mapping WHERE route_id = route_id FOR UPDATE;
+
+SET spot_count = JSON_LENGTH(route_spots);
+
+SELECT JSON_ARRAYAGG(id) INTO exist_spot_ids FROM route_spots_mapping WHERE route_id = route_id;
+
+WHILE `index` < spot_count DO
+  SET spot_id = JSON_UNQUOTE(JSON_EXTRACT(route_spots, CONCAT('$[', `index`, ']')));
   
-  WHILE `index` < spot_count DO
-    SET spot_id = JSON_UNQUOTE(JSON_EXTRACT(route_spots, CONCAT('$[', `index`, ']')));
+  IF NOT JSON_CONTAINS(exist_spot_ids, CAST(spot_id AS JSON)) THEN
     INSERT INTO route_spots_mapping (route_id, spot_id) VALUES (route_id, spot_id);
-    SET `index` = `index` + 1;
-  END WHILE;
+  END IF;
+  
+  SET `index` = `index` + 1;
+END WHILE;
+
+COMMIT;
+
+UPDATE route SET status = '0' WHERE id = route_id;
+SET exec_status = 0;
 END
 ;;
 delimiter ;
@@ -253,11 +438,79 @@ DO UPDATE notice
 delimiter ;
 
 -- ----------------------------
+-- Triggers structure for table plan
+-- ----------------------------
+DROP TRIGGER IF EXISTS `set_default_plan_arrange`;
+delimiter ;;
+CREATE TRIGGER `set_default_plan_arrange` BEFORE INSERT ON `plan` FOR EACH ROW BEGIN
+    IF NEW.arrange IS NULL THEN
+        SET NEW.arrange = '[]';
+    END IF;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table plan
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_insert_plan`;
+delimiter ;;
+CREATE TRIGGER `before_insert_plan` BEFORE INSERT ON `plan` FOR EACH ROW BEGIN
+  CALL process_arrange(NEW.id,NEW.arrange);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table plan
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_update_plan`;
+delimiter ;;
+CREATE TRIGGER `before_update_plan` BEFORE UPDATE ON `plan` FOR EACH ROW BEGIN
+    DECLARE exec_status INT;
+    DECLARE done INT DEFAULT 0;
+    DECLARE start_time DATETIME;
+    DECLARE timeout INT DEFAULT 10;
+    
+    SET start_time = NOW();
+    REPEAT
+      SET exec_status = process_arrange(NEW.id,NEW.arrange);
+      
+      IF exec_status = 1 THEN
+        DO SLEEP(2);
+      ELSE
+        SET done = 1;
+      END IF;
+      
+      IF TIMESTAMPDIFF(SECOND,start_time,NOW()) > timeout THEN
+        SET done = 1;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '请求超时，请稍后重试！';
+       END IF;
+    UNTIL done = 1
+    END REPEAT;
+END
+;;
+delimiter ;
+
+-- ----------------------------
 -- Triggers structure for table route
 -- ----------------------------
-DROP TRIGGER IF EXISTS `after_route_insert`;
+DROP TRIGGER IF EXISTS `set_default_route_spots`;
 delimiter ;;
-CREATE TRIGGER `after_route_insert` AFTER INSERT ON `route` FOR EACH ROW BEGIN
+CREATE TRIGGER `set_default_route_spots` BEFORE INSERT ON `route` FOR EACH ROW BEGIN
+    IF NEW.route_spots IS NULL THEN
+        SET NEW.route_spots = '[]';
+    END IF;
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table route
+-- ----------------------------
+DROP TRIGGER IF EXISTS `before_route_insert`;
+delimiter ;;
+CREATE TRIGGER `before_route_insert` BEFORE INSERT ON `route` FOR EACH ROW BEGIN
   CALL process_route_spots(NEW.id,NEW.route_spots);
 END
 ;;
@@ -266,13 +519,30 @@ delimiter ;
 -- ----------------------------
 -- Triggers structure for table route
 -- ----------------------------
-DROP TRIGGER IF EXISTS `after_route_spots_update`;
+DROP TRIGGER IF EXISTS `before_route_spots_update`;
 delimiter ;;
-CREATE TRIGGER `after_route_spots_update` AFTER UPDATE ON `route` FOR EACH ROW BEGIN
-  IF NEW.route_spots != OLD.route_spots THEN
-    DELETE FROM route_spots_mapping WHERE route_id = NEW.id;
-    CALL process_route_spots(NEW.id, NEW.route_spots);
-  END IF;  
+CREATE TRIGGER `before_route_spots_update` BEFORE UPDATE ON `route` FOR EACH ROW BEGIN
+    DECLARE exec_status INT;
+    DECLARE done INT DEFAULT 0;
+    DECLARE start_time DATETIME;
+    DECLARE timeout INT DEFAULT 15;
+    
+    SET start_time = NOW();
+    REPEAT
+      SET exec_status =  process_route_spots(NEW.id, NEW.route_spots);
+      
+      IF exec_status = 1 THEN
+        DO SLEEP(2);
+      ELSE
+        SET done = 1;
+      END IF;
+      
+      IF TIMESTAMPDIFF(SECOND,start_time,NOW()) > timeout THEN
+        SET done = 1;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '请求超时，请稍后重试！';
+       END IF;
+    UNTIL done = 1
+    END REPEAT;
 END
 ;;
 delimiter ;
